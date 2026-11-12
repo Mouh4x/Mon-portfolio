@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mouhammad Hassani Hamadi — Ingénieur Réseaux & Télécommunications</title>
+<meta name="description" content="Portfolio de Mouhammad Hassani Hamadi, ingénieur réseaux et télécommunications : formations, expérience, projets, certifications et compétences.">
+<meta name="theme-color" content="#0d1216">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#accueil" aria-label="Accueil"><b>Mouhammad</b> <span>Hassani Hamadi</span></a>
+    <nav id="menu" aria-label="Navigation principale">
+      <a href="#experience">Expérience</a><a href="#projets">Projets</a><a href="#competences">Compétences</a>
+      <a href="#formations">Formations</a><a href="#certifications">Certifications</a><a href="#contact">Contact</a>
+    </nav>
+    <button class="icon-btn" id="theme" type="button" aria-label="Changer de thème"><i class="ic" data-ui="sun"></i></button>
+    <button class="icon-btn burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i class="ic" data-ui="menu"></i></button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="accueil">
+  <div class="wrap hero-in">
+    <div class="hero-txt">
+      <a class="avail r0" href="#contact"><span class="dot"></span><span id="dispo"></span></a>
+      <h1 class="name"><span class="sr" id="srname"></span><span class="hello" id="hello" aria-hidden="true"></span><span class="n" id="n1" aria-hidden="true"></span><span class="n" id="n2" aria-hidden="true"></span></h1>
+      <p class="role" id="role"></p>
+      <p class="lead" id="profil"></p>
+      <div class="cta" id="cta">
+        <a class="btn primary" id="cv" href="#" download><i class="ic" data-ui="download"></i>Télécharger le CV</a>
+        <a class="btn" href="#contact">Me contacter</a>
+      </div>
+      <ul class="meta" id="meta"></ul>
+    </div>
+    <div class="portrait" id="portrait">
+      <div class="blob">
+        <img src="assets/img/photo-760.webp" srcset="assets/img/photo-480.webp 480w, assets/img/photo-760.webp 760w" sizes="(max-width: 860px) 70vw, 420px" width="760" height="993" alt="Portrait de Mouhammad Hassani Hamadi" fetchpriority="high">
+      </div>
+      <ul class="langs" id="langs" aria-label="Langues"></ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="experience"><div class="wrap">
+  <h2 class="rv">Expérience</h2><div id="exp"></div>
+</div></section>
+
+<section class="sec" id="projets"><div class="wrap">
+  <h2 class="rv">Projets</h2><div class="proj" id="proj"></div>
+</div></section>
+
+<section class="sec alt" id="competences"><div class="wrap">
+  <h2 class="rv">Compétences</h2><div id="skills"></div>
+</div></section>
+
+<section class="sec" id="formations"><div class="wrap">
+  <h2 class="rv">Formations</h2><div class="tl" id="tl"></div>
+</div></section>
+
+<section class="sec alt" id="certifications"><div class="wrap">
+  <h2 class="rv">Certifications</h2><div class="certs" id="certs"></div>
+</div></section>
+
+<section class="sec" id="interets"><div class="wrap">
+  <h2 class="rv">Centres d’intérêt</h2><ul class="likes" id="likes"></ul>
+</div></section>
+
+<section class="sec alt" id="contact"><div class="wrap">
+  <h2 class="rv">Contact</h2>
+  <div class="contact">
+    <div class="rv">
+      <p class="mail"><a id="mailLink" href="#"></a></p>
+      <button class="btn" id="copy" type="button"><i class="ic" data-ui="copy"></i><span>Copier l’adresse</span></button>
+      <ul class="social" id="social"></ul>
+    </div>
+    <form class="form rv" id="form" novalidate>
+      <label>Nom<input name="name" autocomplete="name" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <label>Message<textarea name="message" rows="5" required></textarea></label>
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn primary" type="submit"><i class="ic" data-ui="send"></i>Envoyer</button>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div></section>
+</main>
+
+<footer class="foot"><div class="wrap">© <span id="year"></span> Mouhammad Hassani Hamadi</div></footer>
+
+<dialog id="lb" aria-label="Certificat agrandi"><button class="icon-btn" id="lbx" type="button" aria-label="Fermer"><i class="ic" data-ui="x"></i></button><img id="lbi" alt=""></dialog>
+
+<noscript><p style="padding:2rem;text-align:center">Ce portfolio nécessite JavaScript pour afficher son contenu.</p></noscript>
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
