@@ -74,14 +74,21 @@
   <h2 class="rv">Contact</h2>
   <div class="contact">
     <div class="rv">
-      <p class="mail"><a id="mailLink" href="#"></a></p>
+      <address class="contact-details">
+        <ul>
+          <li><i class="ic" data-ui="mail" aria-hidden="true"></i><a id="mailLink" href="#"></a></li>
+          <li><i class="ic" data-ui="phone" aria-hidden="true"></i><a id="phoneLink" href="#"></a></li>
+          <li><i class="ic" data-ui="map-pin" aria-hidden="true"></i><span id="postalAddress"></span></li>
+        </ul>
+      </address>
       <button class="btn" id="copy" type="button"><i class="ic" data-ui="copy"></i><span>Copier l’adresse</span></button>
       <ul class="social" id="social"></ul>
     </div>
     <form class="form rv" id="form" novalidate>
-      <label>Nom<input name="name" autocomplete="name" required></label>
-      <label>Email<input name="email" type="email" autocomplete="email" required></label>
-      <label>Message<textarea name="message" rows="5" required></textarea></label>
+      <label>Nom<input name="name" autocomplete="name" maxlength="150" required aria-describedby="status"></label>
+      <label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required aria-describedby="status"></label>
+      <label>Sujet<input name="subject" maxlength="200" required aria-describedby="status"></label>
+      <label>Message<textarea name="message" rows="5" maxlength="10000" required aria-describedby="status"></textarea></label>
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="btn primary" type="submit"><i class="ic" data-ui="send"></i>Envoyer</button>
       <p class="status" id="status" role="status" aria-live="polite"></p>
@@ -92,7 +99,16 @@
 
 <footer class="foot"><div class="wrap">© <span id="year"></span> Mouhammad Hassani Hamadi</div></footer>
 
-<dialog id="lb" aria-label="Certificat agrandi"><button class="icon-btn" id="lbx" type="button" aria-label="Fermer"><i class="ic" data-ui="x"></i></button><img id="lbi" alt=""></dialog>
+<dialog id="lb" class="cert-viewer" aria-labelledby="lbtitle" aria-describedby="lbcaption">
+  <div class="lb-toolbar"><h3 id="lbtitle"></h3><button class="icon-btn" id="lbx" type="button" aria-label="Fermer la visionneuse" autofocus><i class="ic" data-ui="x"></i></button></div>
+  <div class="lb-stage"><img id="lbi" alt=""></div>
+  <div class="lb-controls">
+    <button class="icon-btn" id="lbprev" type="button" aria-label="Image précédente"><i class="ic" data-ui="chevron-left"></i></button>
+    <span id="lbcount" role="status" aria-live="polite" aria-atomic="true"></span>
+    <button class="icon-btn" id="lbnext" type="button" aria-label="Image suivante"><i class="ic" data-ui="chevron-right"></i></button>
+  </div>
+  <p id="lbcaption" class="sr"></p>
+</dialog>
 
 <noscript><p style="padding:2rem;text-align:center">Ce portfolio nécessite JavaScript pour afficher son contenu.</p></noscript>
 <script src="js/icons.js"></script>

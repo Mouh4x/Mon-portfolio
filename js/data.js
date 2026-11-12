@@ -33,13 +33,18 @@ window.PORTFOLIO = {
       details: ["Cycle ingénieur : Génie des Télécommunications et Réseaux (2023 – 2026)", "Cycle préparatoire : Sciences de l’Ingénieur (2021 – 2023)"] },
     { etablissement: "YaneCode Academy", lieu: "Safi, Maroc", diplome: "Formation complémentaire : Web, IA & IoT", periode: "Été 2025", duree: "2 mois", logo: "assets/img/yanecode.png",
       details: ["Web : portfolio HTML/CSS", "IA : n8n, Pandas, NumPy, OpenCV, TensorFlow", "IoT : Smart Home sur Arduino"] },
-    { etablissement: "École Privée Al-Fath", lieu: "Comores", diplome: "Baccalauréat Scientifique : Série C", periode: "2018 – 2021", duree: "3 ans", logo: null, details: [] }
+    { etablissement: "École Privée Al-Fath", lieu: "Iconi, Comores", diplome: "Baccalauréat Scientifique : Série C", periode: "2018 – 2021", duree: "3 ans", logo: null, details: [] }
   ],
 
   experience: {
     poste: "Stage de fin d’études : automatisation des déploiements réseau",
     entreprise: "INEOS", lieu: "Casablanca, Maroc", periode: "Fév. – Juin 2026", duree: "5 mois", logo: "assets/img/ineos.png",
-    resume: "Déploiements réseau plus rapides et moins d’interventions manuelles grâce à l’automatisation. Les configurations sont contrôlées avant leur mise en place pour éviter les erreurs. Chaque changement est vérifié et documenté.",
+    points: [
+      "Réduire les interventions manuelles en automatisant la préparation et l’application des réglages réseau dans un environnement simulé.",
+      "Prévenir les erreurs de configuration grâce à des contrôles avant la mise en place des changements.",
+      "Garantir le suivi et la conformité des changements en comparant l’état du réseau avant et après chaque intervention, puis en archivant les résultats."
+    ],
+    tags: ["NetBox", "Ansible", "Jinja2", "Batfish", "pyATS", "GitHub Actions", "Docker", "EVE-NG", "Python", "Cisco IOS", "Arista EOS", "FortiOS"],
     liens: [{ texte: "Rapport de PFE (PDF)", url: "assets/docs/Rapport-PFE.pdf" }, { texte: "Présentation de soutenance (PPTX)", url: "assets/docs/Presentation-PFE.pptx" }]
   },
 
@@ -56,7 +61,7 @@ window.PORTFOLIO = {
       tags: ["SDN", "API REST"], liens: [] },
     { titre: "Extension du réseau LTE sur les espaces blancs TV (TVWS)", type: "PFA · Projet académique", date: "Juil. – Sept. 2025", image: null,
       resume: "Réduire de 3 à 5 % (gain théorique) le taux de blocage d’appels d’un réseau LTE rural, grâce à deux algorithmes d’allocation dynamique des ressources radio entre les deux bandes. Étude de faisabilité d’un déploiement LTE sur le spectre TV inutilisé, pour couvrir les zones rurales à moindre coût.",
-      tags: ["LTE", "TVWS", "Allocation de ressources"], liens: [{ texte: "Rapport (PDF)", url: "assets/docs/Rapport-PFA-TVWS.pdf" }] },
+      tags: ["LTE", "TVWS", "Allocation de ressources"], liens: [{ texte: "Rapport (PDF)", url: "assets/docs/Rapport-PFA-TVWS.pdf" }, { texte: "Présentation de soutenance (PPTX)", url: "assets/docs/soutenance-PFA.pptx" }] },
     { titre: "ReactionOptimizer", type: "Application Streamlit", date: "Novembre 2026", image: null,
       resume: "Orienter les prochains essais d’une réaction chimique quand les réactifs sont limités : l’application compare 7 modèles prédictifs par validation croisée, propose des conditions optimales sous contraintes et suggère les expériences les plus instructives. Import Excel/CSV, export Excel.",
       tags: ["Python", "Streamlit", "scikit-learn", "pandas"], liens: [{ texte: "Code source", url: "https://github.com/Mouh4x/ReactionOptimizer" }] }
@@ -84,10 +89,10 @@ window.PORTFOLIO = {
     { categorie: "Réseaux et sécurité", outils: [
         { nom: "Fortinet (FortiGate)", icone: "fortinet", couleur: "#EE3124" },
         { nom: "Cisco IOS", icone: "cisco", couleur: "#049FD9" },
-        { nom: "Packet Tracer", logo: "assets/icons/packet-tracer.jpg" },
+        { nom: "Packet Tracer", logo: "assets/icons/packet-tracer.png" },
         { nom: "Wireshark", icone: "wireshark", couleur: "#1679A7" },
         { nom: "EVE-NG", logo: "assets/icons/eve-ng.png", large: true },
-        { nom: "Arista EOS", logo: "assets/icons/arista-official.png", large: true } ],
+        { nom: "Arista EOS", logo: "assets/icons/arista.svg", large: true } ],
       notions: ["VPN/IPsec", "ACL", "AES-GCM", "RSA", "OSPF", "BGP", "RIP", "MPLS", "VLAN", "VTP", "STP", "IPv4/IPv6", "NAT", "DNS", "DHCP"] },
     { categorie: "Télécommunications", presentation: "cartes", outils: [
         { nom: "Architectures 2G à 5G", logo: "assets/icons/mobile-network.svg", neutre: true },
@@ -98,18 +103,18 @@ window.PORTFOLIO = {
         { nom: "Administration Windows Server 2022", icone: "windows", couleur: "#0078D4", largeCarte: true },
         { nom: "Active Directory", logo: "assets/icons/active-directory.svg", neutre: true } ], notions: [] },
     { categorie: "Développement", outils: [
-        { nom: "Python", icone: "python", couleur: "#3776AB" }, { nom: "Java", icone: "openjdk", couleur: "#ED8B00" }, { nom: "Bash", icone: "gnubash", couleur: "#4EAA25" },
+        { nom: "Python", icone: "python", couleur: "#3776AB" }, { nom: "Java", logo: "assets/icons/java.svg" }, { nom: "Bash", icone: "gnubash", couleur: "#4EAA25" },
         { nom: "SQL", logo: "assets/icons/sql.svg", neutre: true }, { nom: "Streamlit", icone: "streamlit", couleur: "#FF4B4B" }, { nom: "scikit-learn", icone: "scikitlearn", couleur: "#F7931E" },
         { nom: "pandas", icone: "pandas", couleur: "#7B5CE0" }, { nom: "NumPy", icone: "numpy", couleur: "#4D77CF" }, { nom: "OpenCV", icone: "opencv", couleur: "#5C3EE8" }, { nom: "TensorFlow", icone: "tensorflow", couleur: "#FF6F00" } ], notions: [] },
     { categorie: "Outils d'automatisation", outils: [
+        { nom: "n8n", logo: "assets/icons/n8n.svg", large: true },
         { nom: "Ansible", icone: "ansible", couleur: "#EE0000" }, { nom: "Jinja2", icone: "jinja", couleur: "#B41717" },
         { nom: "NetBox", logo: "assets/icons/netbox.svg" }, { nom: "Batfish", logo: "assets/icons/batfish-official.svg" },
         { nom: "pyATS", logo: "assets/icons/pyats.png", large: true }, { nom: "Netmiko", logo: "assets/icons/netmiko.png", large: true },
         { nom: "NAPALM", logo: "assets/icons/napalm-official.png" }, { nom: "Git", icone: "git", couleur: "#F05032" },
         { nom: "GitHub Actions", icone: "githubactions", couleur: "#2088FF" }, { nom: "Docker", icone: "docker", couleur: "#2496ED" }, { nom: "AWS (débutant)", icone: "aws", couleur: "#FF9900" } ], notions: [] },
     { categorie: "Gestion de projet", presentation: "cartes", outils: [
-        { nom: "Agile", logo: "assets/icons/agile.svg", neutre: true },
-        { nom: "Scrum", logo: "assets/icons/scrum.svg", neutre: true },
+        { nom: "Méthodes agiles (Scrum)", logo: "assets/icons/agile.svg", neutre: true },
         { nom: "Diagramme de Gantt", logo: "assets/icons/gantt.svg", neutre: true } ], notions: [] }
   ],
 
@@ -121,8 +126,10 @@ window.PORTFOLIO = {
 
   contact: {
     email: "h.hamadimouhammad@gmail.com",
-    /* Clé gratuite à créer sur https://web3forms.com (voir README). Sans clé, le formulaire ouvre votre messagerie. */
-    web3formsKey: "f1764677-1c10-44cb-bac6-198e9380ef8b",
+    telephone: "+212 674 887 425",
+    adresse: "Casablanca, Maroc", /* Seule localisation figurant dans le CV : aucune rue inventée. */
+    /* Clé à obtenir pour cet email sur https://web3forms.com. Sans clé, ouverture explicite de la messagerie, sans confirmation d’envoi. */
+    web3formsKey: "",
     liens: [
       { nom: "LinkedIn", url: "https://www.linkedin.com/in/mouhammad-h-h", icone: "linkedin" },
       { nom: "GitHub", url: "https://github.com/Mouh4x", icone: "github" }

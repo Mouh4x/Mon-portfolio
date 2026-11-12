@@ -36,7 +36,7 @@
   /* Expérience */
   var E = D.experience;
   $("#exp").innerHTML = '<article class="card exp rv">' + logo(E.logo, E.entreprise) + '<div><h3>' + esc(E.poste) + '</h3><p class="sub"><b>' + esc(E.entreprise) + '</b>, ' + esc(E.lieu) + ' · ' + esc(E.periode) + ' (' + esc(E.duree) + ')</p>' +
-    '<p class="exp-resume">' + esc(E.resume) + '</p>' +
+    '<ul class="pts exp-resume">' + E.points.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' + chips(E.tags) +
     '<p class="exp-links">' + E.liens.map(link).join("") + '</p></div></article>';
 
   /* Projets */
@@ -89,18 +89,56 @@
   function prog() { var r = tl.getBoundingClientRect(), p = (innerHeight * .6 - r.top) / r.height; tl.style.setProperty("--p", Math.max(0, Math.min(1, p))); }
   if (reduce) tl.style.setProperty("--p", 1); else { addEventListener("scroll", function () { requestAnimationFrame(prog); }, { passive: true }); prog(); }
 
-  /* Certifications : certificat d’origine puis photos complémentaires. */
+  /* Une seule vignette par certification ; toutes les images dans la visionneuse. */
   function imagesCert(c) { return [{ image: c.image, alt: c.alt }].concat(c.imagesSupplementaires || []); }
   $("#certs").innerHTML = D.certifications.map(function (c, i) {
     var images = imagesCert(c);
     return '<article class="card cert rv"><div class="cert-t"><h3>' + esc(c.titre) + '</h3><ul class="meta"><li><b>' + esc(c.organisme) + '</b></li><li>' + esc(c.date) + '</li><li>' + esc(c.validite) + '</li></ul><p>' + esc(c.texte) + '</p>' + (c.lien ? link(c.lien) : "") + '</div>' +
-      '<div class="cert-images' + (images.length > 1 ? ' cert-images-multiple' : '') + '">' + images.map(function (image, j) {
-        return '<button type="button" data-i="' + i + '" data-image="' + j + '" aria-label="Agrandir : ' + esc(image.alt || c.titre) + '"><img src="' + esc(image.image) + '" alt="' + esc(image.alt || c.titre) + '" loading="lazy"></button>';
-      }).join("") + '</div></article>';
+      '<div class="cert-images"><button type="button" data-i="' + i + '" aria-haspopup="dialog" aria-controls="lb" aria-label="Agrandir : ' + esc(c.alt || c.titre) + (images.length > 1 ? ' — ' + images.length + ' images disponibles' : '') + '"><img src="' + esc(c.image) + '" alt="' + esc(c.alt || c.titre) + '" loading="lazy">' +
+      (images.length > 1 ? '<span class="cert-count" aria-hidden="true">' + ui("images") + '<span>' + images.length + '</span></span>' : '') + '</button></div></article>';
   }).join("");
-  var lb = $("#lb"), lbi = $("#lbi");
-  $$(".cert button").forEach(function (b) { b.onclick = function () { var image = imagesCert(D.certifications[b.dataset.i])[Number(b.dataset.image)]; lbi.src = image.image; lbi.alt = image.alt; lb.showModal(); }; });
-  $("#lbx").onclick = function () { lb.close(); }; lb.addEventListener("click", function (e) { if (e.target === lb || e.target === lbi) lb.close(); });
+  var lb = $("#lb"), lbi = $("#lbi"), certIndex = 0, imageIndex = 0, lbOpener;
+  function showCertImage(n) {
+    var c = D.certifications[certIndex], images = imagesCert(c);
+    imageIndex = (n + images.length) % images.length;
+    var image = images[imageIndex];
+    lbi.src = image.image; lbi.alt = image.alt || c.titre;
+    $("#lbtitle").textContent = c.titre;
+    $("#lbcount").textContent = (imageIndex + 1) + " / " + images.length;
+    $("#lbcaption").textContent = lbi.alt;
+    $("#lbprev").hidden = $("#lbnext").hidden = images.length < 2;
+  }
+  $$(".cert button").forEach(function (b) { b.onclick = function () {
+    certIndex = Number(b.dataset.i); lbOpener = b; showCertImage(0);
+    lb.showModal(); document.body.classList.add("viewer-open"); $("#lbx").focus();
+  }; });
+  $("#lbx").onclick = function () { lb.close(); };
+  $("#lbprev").onclick = function () { showCertImage(imageIndex - 1); };
+  $("#lbnext").onclick = function () { showCertImage(imageIndex + 1); };
+  lb.addEventListener("keydown", function (e) {
+    if (e.key === "Tab") {
+      var buttons = $$("button", lb).filter(function (b) { return !b.hidden && !b.disabled; });
+      var current = buttons.indexOf(document.activeElement);
+      if (current < 0) current = e.shiftKey ? 0 : -1;
+      e.preventDefault(); buttons[(current + (e.shiftKey ? -1 : 1) + buttons.length) % buttons.length].focus();
+      return;
+    }
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); showCertImage(imageIndex + (e.key === "ArrowRight" ? 1 : -1)); }
+  });
+  lb.addEventListener("click", function (e) {
+    if (e.target !== lb) return;
+    var r = lb.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) lb.close();
+  });
+  lb.addEventListener("close", function () { document.body.classList.remove("viewer-open"); if (lbOpener) lbOpener.focus({ preventScroll: true }); });
+  var touchX, touchY;
+  lbi.addEventListener("touchstart", function (e) { if (e.touches.length === 1) { touchX = e.touches[0].clientX; touchY = e.touches[0].clientY; } else touchX = null; }, { passive: true });
+  lbi.addEventListener("touchend", function (e) {
+    if (touchX == null || !e.changedTouches.length) return;
+    var dx = e.changedTouches[0].clientX - touchX, dy = e.changedTouches[0].clientY - touchY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) showCertImage(imageIndex + (dx < 0 ? 1 : -1));
+    touchX = null;
+  }, { passive: true });
 
   /* Centres d’intérêt */
   $("#likes").innerHTML = D.interets.map(function (i) {
@@ -111,18 +149,53 @@
   /* Contact */
   var C = D.contact;
   $("#mailLink").textContent = C.email; $("#mailLink").href = "mailto:" + C.email;
+  $("#phoneLink").textContent = C.telephone; $("#phoneLink").href = "tel:" + C.telephone.replace(/[^+\d]/g, "");
+  $("#postalAddress").textContent = C.adresse;
   $("#social").innerHTML = C.liens.map(function (l) { return '<li><a href="' + l.url + '" target="_blank" rel="noopener" aria-label="' + l.nom + '" title="' + l.nom + '">' + ic(l.icone) + '</a></li>'; }).join("");
   $("#copy").onclick = function () { var s = $("span", this); navigator.clipboard && navigator.clipboard.writeText(C.email).then(function () { s.textContent = "Adresse copiée"; setTimeout(function () { s.textContent = "Copier l’adresse"; }, 2000); }); };
   var form = $("#form"), st = $("#status");
+  var submitButton = $('button[type="submit"]', form), sending = false;
+  form.addEventListener("input", function (e) {
+    e.target.removeAttribute("aria-invalid");
+    if (e.target.setCustomValidity) e.target.setCustomValidity("");
+    if (!sending) st.textContent = "";
+  });
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (!form.checkValidity()) { st.className = "status err"; st.textContent = "Merci de remplir les trois champs avec un email valide."; return; }
+    if (sending) return;
+    $$("[required]", form).forEach(function (field) {
+      field.value = field.value.trim();
+      field.setCustomValidity(field.value ? "" : "Merci de renseigner ce champ.");
+      field.setAttribute("aria-invalid", String(!field.checkValidity()));
+    });
+    if (!form.checkValidity()) {
+      st.className = "status err"; st.textContent = "Merci de remplir les quatre champs avec une adresse email valide.";
+      form.reportValidity(); return;
+    }
     var d = new FormData(form); if (d.get("botcheck")) return;
-    if (!C.web3formsKey) { location.href = "mailto:" + C.email + "?subject=" + encodeURIComponent("Contact depuis le portfolio — " + d.get("name")) + "&body=" + encodeURIComponent(d.get("message") + "\n\n" + d.get("name") + " (" + d.get("email") + ")"); return; }
-    d.append("access_key", C.web3formsKey); d.append("subject", "Nouveau message depuis le portfolio"); st.className = "status"; st.textContent = "Envoi en cours…";
-    fetch("https://api.web3forms.com/submit", { method: "POST", body: d }).then(function (r) { return r.json(); }).then(function (j) {
-      if (j.success) { st.className = "status ok"; st.textContent = "Message envoyé. Merci !"; form.reset(); } else throw 0;
-    }).catch(function () { st.className = "status err"; st.textContent = "L’envoi a échoué. Écrivez-moi directement à " + C.email + "."; });
+    if (!C.web3formsKey) {
+      st.className = "status";
+      st.textContent = "Envoi direct non configuré : votre messagerie va s’ouvrir. Le message n’est pas encore envoyé ; validez son envoi dans votre messagerie.";
+      location.href = "mailto:" + C.email + "?subject=" + encodeURIComponent(d.get("subject")) + "&body=" + encodeURIComponent(d.get("message") + "\n\n" + d.get("name") + " (" + d.get("email") + ")");
+      return;
+    }
+    d.set("access_key", C.web3formsKey);
+    d.set("subject", d.get("subject")); // Le sujet saisi devient l’objet de l’email Web3Forms.
+    d.set("replyto", d.get("email")); d.set("from_name", d.get("name"));
+    sending = true; submitButton.disabled = true; form.setAttribute("aria-busy", "true");
+    st.className = "status"; st.textContent = "Envoi en cours…";
+    var controller = new AbortController(), timer = setTimeout(function () { controller.abort(); }, 20000);
+    fetch("https://api.web3forms.com/submit", { method: "POST", body: d, signal: controller.signal }).then(function (r) {
+      if (!r.ok) throw new Error("Envoi refusé"); return r.json();
+    }).then(function (j) {
+      if (!j.success) throw new Error("Envoi refusé");
+      st.className = "status ok"; st.textContent = "Message envoyé. Merci !"; form.reset();
+      $$("[aria-invalid]", form).forEach(function (field) { field.removeAttribute("aria-invalid"); });
+    }).catch(function () {
+      st.className = "status err"; st.textContent = "L’envoi n’a pas pu être confirmé. Vos champs sont conservés. Réessayez ou écrivez-moi directement à " + C.email + ".";
+    }).finally(function () {
+      clearTimeout(timer); sending = false; submitButton.disabled = false; form.removeAttribute("aria-busy");
+    });
   });
   $("#year").textContent = new Date().getFullYear();
 
