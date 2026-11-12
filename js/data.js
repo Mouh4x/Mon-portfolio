@@ -46,7 +46,7 @@ window.PORTFOLIO = {
       "Garantir le suivi et la conformité des changements en comparant l’état du réseau avant et après chaque intervention, puis en archivant les résultats."
     ],
     tags: ["NetBox", "Ansible", "Jinja2", "Batfish", "pyATS", "GitHub Actions", "Docker", "EVE-NG", "Python", "Cisco IOS", "Arista EOS", "FortiOS"],
-    liens: [{ texte: "Rapport de PFE (PDF)", url: "assets/docs/Rapport-PFE.pdf" }, { texte: "Présentation de soutenance (PPTX)", url: "assets/docs/Presentation-PFE.pptx" }]
+    liens: [{ texte: "Rapport de PFE", url: "https://drive.google.com/file/d/1s1567Yi8aR8YdrA8OScRlr-T112JOFBR/view?usp=drive_link" }, { texte: "Présentation de soutenance", url: "https://docs.google.com/presentation/d/1iKHkl1Sadg2WzHdKL8HkdQkTR73733wX/edit?usp=drive_link&rtpof=true&sd=true" }]
   },
 
   /* image: optionnelle. À ajouter avec date/liens si besoin. */
@@ -63,7 +63,7 @@ window.PORTFOLIO = {
       tags: ["SDN", "API REST"], liens: [] },
     { titre: "Extension du réseau LTE sur les espaces blancs TV (TVWS)", type: "PFA · Projet académique", date: "Juil. – Sept. 2025", image: null,
       resume: "Réduire de 3 à 5 points de pourcentage (gain théorique) le taux de blocage d’appels d’un réseau LTE rural, grâce à deux algorithmes d’allocation dynamique des ressources radio entre les deux bandes. Étude de faisabilité d’un déploiement LTE sur le spectre TV inutilisé, pour couvrir les zones rurales à moindre coût.",
-      tags: ["LTE", "TVWS", "Allocation de ressources"], liens: [{ texte: "Rapport (PDF)", url: "assets/docs/Rapport-PFA-TVWS.pdf" }, { texte: "Présentation de soutenance (PPTX)", url: "assets/docs/soutenance-PFA.pptx" }] },
+      tags: ["LTE", "TVWS", "Allocation de ressources"], liens: [{ texte: "Présentation de soutenance", url: "https://docs.google.com/presentation/d/1EW1m_5LGtaQkPWWdyLrB7GxjUPWVLbcy/edit?usp=drive_link&rtpof=true&sd=true" }] },
     { titre: "ReactionOptimizer", type: "Application Streamlit", date: "Novembre 2026", image: null,
       resume: "Orienter les prochains essais d’une réaction chimique quand les réactifs sont limités : l’application compare 7 modèles prédictifs par validation croisée, propose des conditions optimales sous contraintes et suggère les expériences les plus instructives. Import Excel/CSV, export Excel.",
       tags: ["Python", "Streamlit", "scikit-learn", "pandas"], liens: [{ texte: "Code source", url: "https://github.com/Mouh4x/ReactionOptimizer" }] }

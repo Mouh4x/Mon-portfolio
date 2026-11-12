@@ -25,7 +25,7 @@ Modifier uniquement la chaîne entre guillemets. Le rendu est réalisé dans `in
 - `css/style.css` : styles originaux et finitions ciblées.
 - `assets/img/` : photos, captures, logos d’établissements/entreprise et certificats.
 - `assets/icons/` : logos et pictogrammes locaux, avec licence Devicon.
-- `assets/docs/` : les cinq documents PDF/PPTX fournis, conservés octet pour octet.
+- `assets/docs/` : uniquement le CV (PDF). Les présentations de soutenance (PFE et PFA) sont servies par des liens Google Drive définis dans `js/data.js` (`liens` de chaque projet). Les rapports ne sont pas publiés.
 
 Les messages de validation et les libellés d’interface restent dans la présentation comme dans le projet initial ; les données personnelles et les nouveaux textes éditoriaux restent dans `js/data.js`.
 
