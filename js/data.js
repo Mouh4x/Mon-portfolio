@@ -62,7 +62,7 @@ window.PORTFOLIO = {
       resume: "Centraliser le provisioning et les politiques réseau au sein d’une solution SDN, orchestrée par intégration d’API REST.",
       tags: ["SDN", "API REST"], liens: [] },
     { titre: "Extension du réseau LTE sur les espaces blancs TV (TVWS)", type: "PFA · Projet académique", date: "Juil. – Sept. 2025", image: null,
-      resume: "Réduire de 3 à 5 % (gain théorique) le taux de blocage d’appels d’un réseau LTE rural, grâce à deux algorithmes d’allocation dynamique des ressources radio entre les deux bandes. Étude de faisabilité d’un déploiement LTE sur le spectre TV inutilisé, pour couvrir les zones rurales à moindre coût.",
+      resume: "Réduire de 3 à 5 points de pourcentage (gain théorique) le taux de blocage d’appels d’un réseau LTE rural, grâce à deux algorithmes d’allocation dynamique des ressources radio entre les deux bandes. Étude de faisabilité d’un déploiement LTE sur le spectre TV inutilisé, pour couvrir les zones rurales à moindre coût.",
       tags: ["LTE", "TVWS", "Allocation de ressources"], liens: [{ texte: "Rapport (PDF)", url: "assets/docs/Rapport-PFA-TVWS.pdf" }, { texte: "Présentation de soutenance (PPTX)", url: "assets/docs/soutenance-PFA.pptx" }] },
     { titre: "ReactionOptimizer", type: "Application Streamlit", date: "Novembre 2026", image: null,
       resume: "Orienter les prochains essais d’une réaction chimique quand les réactifs sont limités : l’application compare 7 modèles prédictifs par validation croisée, propose des conditions optimales sous contraintes et suggère les expériences les plus instructives. Import Excel/CSV, export Excel.",
