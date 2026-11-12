@@ -30,11 +30,11 @@ window.PORTFOLIO = {
 
   /* Frise : du plus récent au plus ancien. logo: null → icône neutre */
   formations: [
-    { etablissement: "ENSA Safi", lieu: "Maroc", diplome: "Diplôme d’ingénieur : Génie des Télécommunications et Réseaux", periode: "2021 – 2026", duree: "5 ans", logo: "assets/img/ensas.png",
+    { etablissement: "ENSA Safi", lieu: "Maroc", diplome: "Diplôme d’ingénieur : Génie des Télécommunications et Réseaux", periode: "Nov. 2021 – Juin. 2026", duree: "5 ans", logo: "assets/img/ensas.png",
       details: ["Cycle ingénieur : Génie des Télécommunications et Réseaux (2023 – 2026)", "Cycle préparatoire : Sciences de l’Ingénieur (2021 – 2023)"] },
     { etablissement: "YaneCode Academy", lieu: "Safi, Maroc", diplome: "Formation complémentaire : Web, IA & IoT", periode: "Été 2025", duree: "2 mois", logo: "assets/img/yanecode.png",
       details: ["Web : portfolio HTML/CSS", "IA : n8n, Pandas, NumPy, OpenCV, TensorFlow", "IoT : Smart Home sur Arduino"] },
-    { etablissement: "École Privée Al-Fath", lieu: "Iconi, Comores", diplome: "Baccalauréat Scientifique : Série C", periode: "2018 – 2021", duree: "3 ans", logo: null, details: [] }
+    { etablissement: "École Privée Al-Fath", lieu: "Iconi, Comores", diplome: "Baccalauréat Scientifique : Série C", periode: "Sept. 2018 – Oct. 2021", duree: "3 ans", logo: null, details: [] }
   ],
 
   experience: {
