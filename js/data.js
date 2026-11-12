@@ -122,7 +122,7 @@ window.PORTFOLIO = {
   contact: {
     email: "h.hamadimouhammad@gmail.com",
     /* Clé gratuite à créer sur https://web3forms.com (voir README). Sans clé, le formulaire ouvre votre messagerie. */
-    web3formsKey: "",
+    web3formsKey: "f1764677-1c10-44cb-bac6-198e9380ef8b",
     liens: [
       { nom: "LinkedIn", url: "https://www.linkedin.com/in/mouhammad-h-h", icone: "linkedin" },
       { nom: "GitHub", url: "https://github.com/Mouh4x", icone: "github" }
