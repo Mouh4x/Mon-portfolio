@@ -31,7 +31,7 @@
     var t3 = words($("#profil"), I.phrases.slice(1).join(" "), t2 + 80, 45);
     $("#cta").style.setProperty("--ad", Math.max(t2, t3 - 900) + "ms"); $("#meta").style.setProperty("--ad", Math.max(t2 + 150, t3 - 700) + "ms");
   }
-  $("#meta").innerHTML = '<li>' + ui("map-pin") + esc(I.lieu) + '</li><li>' + ui("car-front") + esc(I.permis) + '</li>';
+  $("#meta").innerHTML = '<li>' + ui("map-pin") + esc(I.lieu) + '</li>';
   $("#langs").innerHTML = D.langues.map(function (l) {
     return '<li><img src="assets/flags/' + l.drapeau + '.svg" alt="" width="30" height="30"><div><b>' + esc(l.nom) + '</b><small>' + esc(l.niveau) + '</small></div></li>';
   }).join("");
