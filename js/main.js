@@ -10,6 +10,8 @@
 
   /* Accueil */
   var I = D.identite;
+  $("#brandName").textContent = I.marque;
+  $(".brand").setAttribute("aria-label", I.prenom + " " + I.nomFamille + " — Accueil");
   /* Introduction : 1re phrase lettre par lettre, les suivantes mot par mot */
   $("#dispo").textContent = I.disponibilite; $("#cv").href = I.cv;
   function chars(el, text, t, step) { el.textContent = ""; text.split("").forEach(function (ch) { var s = document.createElement("span"); s.className = "c"; s.textContent = ch; s.style.animationDelay = t + "ms"; t += step; el.appendChild(s); }); return t; }
@@ -25,6 +27,7 @@
     var t = chars($("#hello"), I.debut, 450, 36);
     t = chars($("#n1"), I.prenom, t + 70, 36); t = chars($("#n2"), I.nomFamille, t, 36);
     var t2 = words($("#role"), I.phrases[0], t + 160, 70);
+    $("#portrait").style.setProperty("--portrait-delay", (t2 + 100) + "ms");
     var t3 = words($("#profil"), I.phrases.slice(1).join(" "), t2 + 80, 45);
     $("#cta").style.setProperty("--ad", Math.max(t2, t3 - 900) + "ms"); $("#meta").style.setProperty("--ad", Math.max(t2 + 150, t3 - 700) + "ms");
   }
@@ -40,25 +43,19 @@
     '<p class="exp-links">' + E.liens.map(link).join("") + '</p></div></article>';
 
   /* Projets */
-  $("#proj").innerHTML = D.projets.map(function (p) {
-    return '<article class="card pj rv' + (p.image ? " big" : "") + '">' + (p.image ? '<figure><img src="' + p.image + '" alt="' + esc(p.alt || "") + '" loading="lazy"></figure>' : "") +
+  function imagesProjet(p) { return (p.image ? [{ image: p.image, alt: p.alt }] : []).concat(p.imagesSupplementaires || []); }
+  $("#proj").innerHTML = D.projets.map(function (p, i) {
+    var images = imagesProjet(p);
+    return '<article class="card pj rv' + (p.image ? " big" : "") + '">' +
       '<div class="pj-b"><div><h3>' + esc(p.titre) + '</h3><small>' + esc([p.type, p.date].filter(Boolean).join(" · ")) + '</small></div><p>' + esc(p.resume) + '</p>' +
-      (p.liens.length ? '<div class="pj-l">' + p.liens.map(link).join("") + '</div>' : "") + chips(p.tags) + '</div></article>';
+      (p.liens.length ? '<div class="pj-l">' + p.liens.map(link).join("") + '</div>' : "") + chips(p.tags) + '</div>' +
+      (images.length ? '<figure class="project-gallery"><button type="button" data-project="' + i + '" aria-haspopup="dialog" aria-controls="lb" aria-label="Agrandir les captures : ' + esc(p.titre) + '"><img src="' + esc(images[0].image) + '" alt="' + esc(images[0].alt || p.titre) + '" loading="lazy">' +
+      (images.length > 1 ? '<span class="cert-count" aria-hidden="true">' + ui("images") + '<span>' + images.length + '</span></span>' : '') + '</button></figure>' : '') + '</article>';
   }).join("");
 
   /* Compétences */
-  function hexLum(h) { var n = parseInt(h.slice(1), 16), c = [n >> 16, (n >> 8) & 255, n & 255].map(function (v) { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; }
-  function mix(h, t, a) { var n = parseInt(h.slice(1), 16); return "#" + [n >> 16, (n >> 8) & 255, n & 255].map(function (v) { return Math.round(v + (t - v) * a).toString(16).padStart(2, "0"); }).join(""); }
   function outil(o) {
-    var visuel;
-    if (o.logo) {
-      visuel = '<div class="skill-logo' + (o.neutre ? ' neutral' : ' brand-logo') + (o.large ? ' wide-logo' : '') + '" aria-hidden="true"><img src="' + esc(o.logo) + '" alt="" loading="lazy"></div>';
-    } else if (o.icone && ICONS[o.icone]) {
-      var col = o.couleur || "#8593a0", l = hexLum(col), dk = l < .2 ? mix(col, 255, .62) : col, lt = l > .55 ? mix(col, 0, .38) : col;
-      visuel = ic(o.icone, "--cl:" + dk + ";--cd:" + lt);
-    } else {
-      visuel = '<div class="mono" aria-hidden="true">' + esc(o.mono || o.nom.slice(0, 3)) + '</div>';
-    }
+    var visuel = '<div class="skill-logo' + (o.neutre ? ' neutral' : ' brand-logo') + (o.large ? ' wide-logo' : '') + '" aria-hidden="true"><img src="' + esc(o.logo) + '" alt="" loading="lazy"></div>';
     return '<div class="tile' + (o.largeCarte ? ' tile-wide' : '') + '">' + visuel + '<span>' + esc(o.nom) + '</span></div>';
   }
   $("#skills").innerHTML = D.competences.map(function (c) {
@@ -93,13 +90,13 @@
   function imagesCert(c) { return [{ image: c.image, alt: c.alt }].concat(c.imagesSupplementaires || []); }
   $("#certs").innerHTML = D.certifications.map(function (c, i) {
     var images = imagesCert(c);
-    return '<article class="card cert rv"><div class="cert-t"><h3>' + esc(c.titre) + '</h3><ul class="meta"><li><b>' + esc(c.organisme) + '</b></li><li>' + esc(c.date) + '</li><li>' + esc(c.validite) + '</li></ul><p>' + esc(c.texte) + '</p>' + (c.lien ? link(c.lien) : "") + '</div>' +
+    return '<article class="card cert rv"><div class="cert-t"><h3>' + esc(c.titre) + '</h3><ul class="meta"><li><b>' + esc(c.organisme) + '</b></li><li>' + esc(c.date) + '</li>' + (c.validite ? '<li>' + esc(c.validite) + '</li>' : '') + '</ul><p>' + esc(c.texte) + '</p>' + (c.identifiant ? '<small class="cert-id">ID : ' + esc(c.identifiant) + '</small>' : '') + (c.lien ? link(c.lien) : "") + '</div>' +
       '<div class="cert-images"><button type="button" data-i="' + i + '" aria-haspopup="dialog" aria-controls="lb" aria-label="Agrandir : ' + esc(c.alt || c.titre) + (images.length > 1 ? ' — ' + images.length + ' images disponibles' : '') + '"><img src="' + esc(c.image) + '" alt="' + esc(c.alt || c.titre) + '" loading="lazy">' +
       (images.length > 1 ? '<span class="cert-count" aria-hidden="true">' + ui("images") + '<span>' + images.length + '</span></span>' : '') + '</button></div></article>';
   }).join("");
-  var lb = $("#lb"), lbi = $("#lbi"), certIndex = 0, imageIndex = 0, lbOpener;
+  var lb = $("#lb"), lbi = $("#lbi"), certIndex = 0, imageIndex = 0, lbOpener, galleryType = "certification";
   function showCertImage(n) {
-    var c = D.certifications[certIndex], images = imagesCert(c);
+    var c = galleryType === "projet" ? D.projets[certIndex] : D.certifications[certIndex], images = galleryType === "projet" ? imagesProjet(c) : imagesCert(c);
     imageIndex = (n + images.length) % images.length;
     var image = images[imageIndex];
     lbi.src = image.image; lbi.alt = image.alt || c.titre;
@@ -109,7 +106,11 @@
     $("#lbprev").hidden = $("#lbnext").hidden = images.length < 2;
   }
   $$(".cert button").forEach(function (b) { b.onclick = function () {
-    certIndex = Number(b.dataset.i); lbOpener = b; showCertImage(0);
+    galleryType = "certification"; certIndex = Number(b.dataset.i); lbOpener = b; showCertImage(0);
+    lb.showModal(); document.body.classList.add("viewer-open"); $("#lbx").focus();
+  }; });
+  $$("[data-project]").forEach(function (b) { b.onclick = function () {
+    galleryType = "projet"; certIndex = Number(b.dataset.project); lbOpener = b; showCertImage(0);
     lb.showModal(); document.body.classList.add("viewer-open"); $("#lbx").focus();
   }; });
   $("#lbx").onclick = function () { lb.close(); };
@@ -148,10 +149,14 @@
 
   /* Contact */
   var C = D.contact;
+  $("#contactInvitation").textContent = C.invitation;
+  $("#footerName").textContent = I.prenom + " " + I.nomFamille;
+  $("#copyrightName").textContent = I.prenom + " " + I.nomFamille;
+  $("#footerLinks").innerHTML = C.liens.map(function (l) { return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer">' + esc(l.nom) + '</a>'; }).join("");
   $("#mailLink").textContent = C.email; $("#mailLink").href = "mailto:" + C.email;
   $("#phoneLink").textContent = C.telephone; $("#phoneLink").href = "tel:" + C.telephone.replace(/[^+\d]/g, "");
   $("#postalAddress").textContent = C.adresse;
-  $("#social").innerHTML = C.liens.map(function (l) { return '<li><a href="' + l.url + '" target="_blank" rel="noopener" aria-label="' + l.nom + '" title="' + l.nom + '">' + ic(l.icone) + '</a></li>'; }).join("");
+  $("#social").innerHTML = C.liens.map(function (l) { return '<li><a href="' + l.url + '" target="_blank" rel="noopener" aria-label="' + l.nom + '" title="' + l.nom + '">' + '<img src="' + esc(l.logo) + '" alt="" width="24" height="24" aria-hidden="true">' + '</a></li>'; }).join("");
   $("#copy").onclick = function () { var s = $("span", this); navigator.clipboard && navigator.clipboard.writeText(C.email).then(function () { s.textContent = "Adresse copiée"; setTimeout(function () { s.textContent = "Copier l’adresse"; }, 2000); }); };
   var form = $("#form"), st = $("#status");
   var submitButton = $('button[type="submit"]', form), sending = false;

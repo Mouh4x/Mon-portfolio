@@ -1,109 +1,161 @@
 # Portfolio — Mouhammad Hassani Hamadi
 
-Site statique HTML, CSS et JavaScript, sans installation ni compilation. Le projet complet comprend les photos, certificats, CV, rapports, présentations, logos, icônes et polices locales. Aucun chargement externe n’est nécessaire pour afficher les pages. L’envoi direct du formulaire, une fois activé, utilise Web3Forms.
+Site statique HTML, CSS et JavaScript. Aucun abonnement, dépendance de développement, installation ou compilation n’est requis pour exécuter ce code. Les photos, certificats, CV, rapports, présentations, logos et polices sont intégrés localement. Seul l’envoi du formulaire utilise un service externe (Web3Forms).
 
-## Démarrage et publication
+## Ouvrir et publier
 
-Extraire le ZIP, puis ouvrir `portfolio/index.html`. Le site peut être consulté directement depuis ce fichier. Pour la publication, déposer le contenu du dossier `portfolio` sur un hébergement statique HTTPS, avec `index.html` à la racine. La copie de l’email dépend de la disponibilité du presse-papiers dans le navigateur, généralement en contexte sécurisé.
+Extraire l’archive ZIP puis ouvrir `portfolio/index.html` dans un navigateur. Pour publier, déposer **le contenu** du dossier `portfolio` sur un hébergement statique HTTPS : `index.html`, `css/`, `js/` et `assets/` doivent être à la racine publiée. Le site ne dépend d’aucune offre payante ni d’aucun environnement de construction. Les éventuelles restrictions de téléchargement de la plateforme qui transmet le ZIP ne sont pas contrôlables par ce projet.
 
-## Structure
+## Modifier le nom de la navigation — emplacement exact
 
-- `index.html` : structure, formulaire et dialogue accessible de la galerie.
-- `js/data.js` : **unique fichier de données** pour l’identité, les langues, les formations, l’expérience, les projets, les certifications, les compétences, les centres d’intérêt et les coordonnées. La clé du formulaire est également définie ici.
-- `js/main.js` : affichage des données et interactions.
-- `js/icons.js` : icônes vectorielles intégrées, dont les deux nouveaux pictogrammes d’interface téléphone et galerie.
-- `css/style.css` : feuille d’origine, conservée avec uniquement des ajouts ciblés en fin de fichier.
-- `assets/` : ressources locales, dont `docs/` pour les fichiers PDF et PPTX.
+Ouvrir **`js/data.js`, ligne 8** :
 
-Aucune dépendance de développement ni paquet d’installation du logiciel Packet Tracer n’est inclus dans le livrable.
+```js
+    marque: "Mouhammad.", // Texte affiché en haut à gauche de la navigation.
+```
 
-## Corrections apportées
+Modifier uniquement la chaîne entre guillemets. Le rendu est réalisé dans `index.html` par l’élément `#brandName` et initialisé par `js/main.js`. Le nom complet reste dans l’introduction, le pied de page et le libellé accessible du lien d’accueil. Il n’est pas nécessaire de modifier ces fichiers pour changer la marque de navigation.
 
-### Compétences et gestion de projet
+## Organisation et contenu unique
 
-Java utilise la tasse avec sa vapeur en SVG. SQL utilise un véritable pictogramme neutre de base de données : ce langage n’a pas de logo de marque unique. Le mot-symbole Arista Networks est remplacé par sa version vectorielle bleue. Packet Tracer utilise l’icône originale du logiciel extraite de son paquet de distribution, et non le logo Cisco générique ou une icône de thème tierce. Cette ressource native est un PNG de 48 × 48 pixels ; elle est affichée à 44 × 44 pixels, sans agrandissement artificiel. Java, Arista et n8n sont vectoriels. Les logos de marque sur fond blanc et les pictogrammes neutres adaptés au thème restent lisibles en clair et en sombre.
+- `js/data.js` : unique fichier de données pour l’identité, la marque de navigation, les langues, l’expérience, les projets et leurs galeries, les compétences, les formations, les certifications, les centres d’intérêt, les coordonnées, les liens sociaux et la phrase de contact.
+- `index.html` : structure accessible et libellés d’interface.
+- `js/main.js` : rendu, menu, thèmes, animations, visionneuse et formulaire.
+- `js/icons.js` : icônes d’interface et icônes historiques, conservées pour ne pas supprimer des ressources du projet original. Les compétences affichées utilisent désormais les fichiers de `assets/icons/`, pas ces anciens logos monochromes.
+- `css/style.css` : styles originaux et finitions ciblées.
+- `assets/img/` : photos, captures, logos d’établissements/entreprise et certificats.
+- `assets/icons/` : logos et pictogrammes locaux, avec licence Devicon.
+- `assets/docs/` : les cinq documents PDF/PPTX fournis, conservés octet pour octet.
 
-n8n et son symbole officiel sont ajoutés au rail des outils d’automatisation. Toutes les compétences possèdent un visuel local ou un SVG intégré ; aucun monogramme de remplacement n’est utilisé pour une compétence affichée.
+Les messages de validation et les libellés d’interface restent dans la présentation comme dans le projet initial ; les données personnelles et les nouveaux textes éditoriaux restent dans `js/data.js`.
 
-Agile et Scrum sont regroupés dans une seule grande carte « Méthodes agiles (Scrum) », avec un cycle itératif. Le diagramme de Gantt utilise une grande carte et un planning à barres. La palette et les interactions des cartes existantes sont conservées.
+## Modifications livrées
 
-### Certifications
+### Logos fidèles en clair et en sombre
 
-Chaque certification affiche uniquement son certificat en vignette. Quand `imagesSupplementaires` contient des éléments, une petite icône de galerie et le nombre total d’images apparaissent dans la vignette. Pour YaneCode Academy, le certificat est la première image et la photo de groupe la seconde.
+Les compétences n’utilisent plus de SVG de marque héritant de `currentColor`. Les transformations de teinte selon le thème ont été retirées. Les logos multicolores de Linux/Tux, Python, C, Bash, Streamlit, scikit-learn, pandas, NumPy, OpenCV, TensorFlow, Ansible, Git, GitHub Actions, Docker et AWS sont des SVG locaux Devicon dans leur variante couleur. Java conserve sa tasse bleue et sa vapeur rouge. Les logos monochromes par identité (par exemple Ansible) restent fidèles : il ne s’agit pas d’une conversion monochrome du site.
 
-Un clic ou la touche Entrée ouvre la visionneuse. Les boutons précédent/suivant et les flèches gauche/droite du clavier permettent de naviguer. Sur téléphone, un balayage horizontal sur l’image change aussi d’image. Le bouton de fermeture, Échap et un clic à l’extérieur ferment la visionneuse ; le focus revient à la vignette d’origine. Le dialogue natif retient le focus pendant son ouverture, le fond est non interactif et le défilement de la page est bloqué. Les boutons tactiles mesurent 44 × 44 pixels. Le compteur est annoncé aux technologies d’assistance.
+Les symboles Cisco, Fortinet, Wireshark et Jinja2 ont une couleur de marque fixe dans leur SVG local. Windows conserve son SVG bleu. Les logos de Packet Tracer, EVE-NG, Arista, n8n, NetBox, Batfish, pyATS, Netmiko et NAPALM sont préservés. Un petit fond blanc identique dans les deux thèmes permet de lire les logos sombres sans les recolorer. Les pictogrammes descriptifs de SQL, Active Directory, télécommunications et gestion de projet gardent leur couleur propre fixe ; ils ne sont pas présentés comme des logos officiels.
 
-Le même comportement s’applique automatiquement à toute certification à laquelle des images complémentaires sont ajoutées dans `js/data.js`.
+**C :** la carte C était absente du fichier de données reçu. Elle a été ajoutée à votre demande avec le symbole C bleu-gris de Devicon (`c-original.svg`), sans inventer de niveau ni d’expérience. Il ne s’agit pas d’un logo noir ou rouge. Le langage C ne possède pas une autorité de marque unique comparable à un éditeur de logiciel ; cette variante est identifiée comme provenant de Devicon, sans revendiquer une officialité non établie.
 
-### Formations, expérience et projets
+Les liens sociaux affichent aussi les fichiers de marque locaux avec leurs couleurs fixes. Le symbole Chess.com reste vert. Les pictogrammes d’interface (soleil, menu, téléphone, etc.) continuent de suivre la palette : ce ne sont pas des logos de marque.
 
-Le lieu du baccalauréat est « Iconi, Comores », conformément à la demande. Le PFE est présenté en trois puces, résultat avant moyen, sans sigle dans la description. L’environnement simulé est précisé pour ne pas laisser entendre un déploiement en production. Les pastilles reprennent la pile explicitement citée dans le CV et corroborée par le rapport : NetBox, Ansible, Jinja2, Batfish, pyATS, GitHub Actions, Docker, EVE-NG, Python, Cisco IOS, Arista EOS et FortiOS.
+Le logo INEOS est recadré dans un fichier dérivé `assets/img/ineos-cadre.png`, uniquement pour réduire les grandes marges blanches. Son graphisme et ses couleurs ne sont pas redessinés. L’original `ineos.png` reste fourni.
 
-La présentation existante `assets/docs/soutenance-PFA.pptx` est liée en complément du rapport du PFA. **Toutes les descriptions des projets sont conservées mot pour mot**, comme leurs autres données, à l’exception de cet ajout de lien au PFA. Les cinq documents PDF/PPTX fournis restent inchangés, octet pour octet.
+### Certification SQL (Basic)
 
-### Contact
+La certification est ajoutée à la fin de la liste, qui conserve son ordre du plus récent au plus ancien : après Udemy (20 juillet 2024), SQL (Basic) (18 mars 2024).
 
-Les coordonnées issues du CV sont regroupées en liste alignée, avec icônes email, téléphone et localisation. L’email et le téléphone sont cliquables. Valeurs : `h.hamadimouhammad@gmail.com`, `+212 674 887 425` et `Casablanca, Maroc`.
+- Intitulé exact : **SQL (Basic)**.
+- Organisme : **HackerRank**.
+- Date lue sur l’image : **18 Mar, 2024**, affichée en français **18 mars 2024**.
+- Identifiant lu sur l’image : **DAE6BE6A8D69**.
+- Titulaire : **MOUHAMMAD Hassani Hamadi**, en respectant le prénom en capitales sur le certificat ; aucune modification du nom du portfolio.
+- Vérification : https://www.hackerrank.com/certificates/dae6be6a8d69
+- Visuel local : `assets/img/cert-sql.png`, copie exacte du fichier image fourni, sans retouche ni recompression.
 
-Le formulaire comporte, dans cet ordre, **Nom, Email, Sujet, Message**. Les quatre champs sont obligatoires. Les entrées composées seulement d’espaces sont refusées, la syntaxe de l’email est contrôlée, le premier champ invalide reçoit le focus via la validation native et les erreurs sont signalées. Le sujet saisi est transmis dans le champ `subject` de Web3Forms et devient l’objet de l’email reçu. L’email de l’expéditeur est transmis comme adresse de réponse (`replyto`).
+Description affichée : « Certification SQL de niveau Basic portant sur les requêtes simples, les relations et les agrégations. »
 
-Pendant l’envoi, le bouton est désactivé pour éviter les doublons. Une confirmation apparaît seulement après une réponse positive du service. En cas d’erreur, le message est conservé ; une demande sans réponse après 20 secondes est interrompue avec un message explicite. Ce délai ne permet pas d’exclure un traitement côté service : l’interface indique donc que l’envoi n’a pas pu être confirmé.
+La page officielle de vérification a pu être consultée et indique : « It includes simple queries, relationships, and aggregators. » La page https://www.hackerrank.com/skills-verification/sql_basic confirme l’intitulé SQL (Basic) et cite les requêtes simples. Le nom, la date et l’identifiant ont été lus sur votre image ; le texte extrait de la page de vérification ne les exposait pas. Aucun score, durée personnelle d’examen, classement ou date d’expiration n’est ajouté. Le champ `validite` est vide, sans puce vide dans l’affichage.
 
-## Activer l’envoi direct Web3Forms — configuration manquante
+Comme les autres certifications : intitulé, organisme, date et description au-dessus ; certificat en dessous, agrandissable au clic ou au clavier. Le lien de vérification est conservé.
 
-**Aucune clé Web3Forms n’était fournie dans le projet. Il est impossible de finaliser un envoi réel à votre compte sans cette clé ; aucune clé n’a été inventée.**
+### Captures de projets et ordre de lecture
 
-1. Obtenir votre clé d’accès pour votre adresse de réception sur https://web3forms.com et effectuer la vérification de cette adresse demandée par le service.
-2. Dans `js/data.js`, remplacer `contact.web3formsKey: ""` par votre clé, en conservant la syntaxe JavaScript. La clé d’accès Web3Forms est conçue pour un formulaire côté navigateur ; ne pas insérer de mot de passe de messagerie ou de clé serveur privée.
-3. Publier le site en HTTPS, envoyer un message de test réel et vérifier sa réception, l’objet saisi et l’adresse de réponse. Les réglages de destination ou de restriction de domaine, s’ils sont utilisés, se font dans le compte du service : le champ `contact.email` n’est pas un sélecteur de destinataire Web3Forms.
+La capture WAN existante est conservée et votre seconde capture est ajoutée à la galerie du projet « Conception et déploiement d’un WAN d’entreprise multi-sites évolutif ». La vignette indique deux images ; un clic ouvre la galerie. Les deux fichiers locaux sont `wan.webp` et `wan-topologie.png`. La capture ajoutée est une copie exacte du fichier fourni.
 
-Sans clé, le comportement de secours ouvre la messagerie du visiteur avec le **sujet exact** et le message préremplis. Un texte explique clairement que le message n’est pas encore envoyé et qu’il faut valider l’envoi dans la messagerie. Aucune fausse confirmation de réception n’est affichée. Ce mécanisme nécessite une messagerie associée aux liens `mailto:`.
+Dans les projets, la présentation textuelle précède désormais les images sur ordinateur comme sur mobile. Aucun titre, résumé, date, technologie ou lien de projet préexistant n’a été modifié.
 
-## Informations non fournies
+Sur l’accueil mobile, le portrait n’est plus réordonné avant le texte : introduction, actions et informations passent en premier ; portrait ensuite. Sur ordinateur, la présentation reste à gauche et le portrait à droite, pour préserver le design initial. Avec les animations actives, le portrait entre après la première phrase de présentation plutôt que dès l’ouverture. Avec « réduire les animations », tous les textes et visuels sont immédiatement disponibles, sans effet retardé.
 
-Le CV indique seulement **Casablanca, Maroc** : aucune rue ni aucun code postal n’y figure. La liste de contact reprend donc cette localisation sans inventer une adresse postale détaillée. Pour la compléter ultérieurement, modifier `contact.adresse` dans `js/data.js`.
+### Langues
 
-La clé Web3Forms constitue l’autre information manquante. Le traitement du formulaire a été vérifié avec des réponses simulées ; la réception d’un email réel ne peut pas être attestée sans clé valide et sans accès à votre boîte de réception.
+Les quatre langues et leurs niveaux existants sont inchangés. Elles sont regroupées dans un bloc « Langues » à la fin de la section Compétences, et ne chevauchent plus le portrait. Disposition à quatre colonnes sur grand écran, deux sur mobile et une sur les plus petits écrans.
 
-## Préservation, responsive et accessibilité
+### Contact et pied de page
 
-Le design existant, la palette, les sections non concernées, les animations, les photos et les descriptions des projets sont préservés. Aucun sous-titre décoratif, texte de remplissage ou séparateur de section n’est ajouté. Les nouvelles valeurs de contenu restent dans `js/data.js` ; seuls les libellés d’interface et messages de validation demeurent dans les fichiers de présentation, comme dans le projet d’origine.
+La phrase « Une question, une opportunité ou un projet ? Échangeons. » est stockée dans `contact.invitation`. Coordonnées dans des blocs alignés, formulaire sur un panneau discret, champs lisibles dans les deux thèmes et bouton adapté au téléphone. Le pied de page présente le nom complet, les liens sociaux issus des données et l’année automatique, sans nouveau séparateur entre sections ni mention d’hébergeur.
 
-Le mode `prefers-reduced-motion: reduce` reste respecté, y compris pour les nouvelles interactions. La navigation, le changement de thème et le défilement horizontal des compétences sont conservés.
+**Mention « powered by Netlify » :** aucune occurrence de « Netlify » ou « powered by » n’était présente dans le HTML, le CSS, le JavaScript ou les ressources textuelles de l’archive reçue. Le projet livré n’ajoute aucun badge d’hébergement. Si cette mention apparaît encore sur la version publiée, elle est extérieure à ces sources ; l’URL publiée et l’accès à ses réglages n’ont pas été fournis, donc son origine et son retrait côté hébergement ne peuvent pas être vérifiés ici. Aucun contournement CSS visant à masquer des éléments externes n’a été ajouté.
 
-## Contrôles effectués
+## Galeries accessibles
 
-Tests sous Chromium aux largeurs **320, 390, 768 et 1440 pixels**, dans les thèmes clair et sombre : aucune erreur JavaScript, aucune ressource locale manquante, aucun débordement horizontal de page et aucune compétence sans visuel. Contrôles de la vignette unique, du badge de galerie, de la navigation clavier et tactile simulée, de la fermeture et du retour du focus ; vérification complémentaire en paysage mobile et du confinement du focus dans le dialogue.
+La même visionneuse sert aux certifications et aux captures des projets. Clic, Entrée ou Espace sur une vignette ; boutons précédent/suivant et touches fléchées pour naviguer ; balayage horizontal sur téléphone ; Échap, bouton de fermeture ou clic hors dialogue pour fermer. Le dialogue natif bloque les interactions avec l’arrière-plan ; le focus est retenu dans la visionneuse puis rendu à la vignette d’origine. Le compteur est annoncé et les commandes de navigation disparaissent lorsqu’une seule image est disponible.
 
-Contrôles du formulaire avec interception locale des requêtes (aucun message réel envoyé) : champs vides, espaces seuls, email incorrect, transfert du sujet et de l’adresse de réponse, confirmation après succès, refus du service, erreur HTTP, erreur réseau, maintien des champs après erreur et prévention des doublons. Le mode sans clé et l’ouverture locale de `index.html` ont également été vérifiés, ainsi que le thème et le menu mobile avec les animations d’origine actives.
+La galerie YaneCode (certificat + photo de groupe) est conservée.
 
-Comparaison automatique des données de projets avec l’archive source : toutes les descriptions et les autres données initiales sont identiques ; seul le lien vers la présentation du PFA est ajouté. Comparaison d’empreintes des cinq documents originaux : identiques. Les sites externes préexistants n’ont pas fait l’objet d’un audit de leur contenu.
+Pour ajouter une image complémentaire à un projet ou à une certification dans `js/data.js` :
 
-## Provenance des visuels et licences
+```js
+imagesSupplementaires: [
+  { image: "assets/img/mon-image.png", alt: "Description factuelle de l’image" }
+]
+```
 
-Les marques servent uniquement à identifier les outils. Elles appartiennent à leurs titulaires ; aucune affiliation n’est revendiquée. Une licence d’icônes ne supprime pas les droits sur les marques.
+Le champ `image` reste la première vignette et la première image de la galerie.
 
-### Ressources remplacées ou ajoutées
+## Formulaire : configuration existante conservée
 
-- Java, logo tasse/vapeur, SVG Devicon : https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg — projet Devicon sous MIT, marque Java appartenant à son titulaire.
-- Arista Networks, mot-symbole vectoriel : https://commons.wikimedia.org/wiki/File:Arista-networks-logo.svg ; fichier https://upload.wikimedia.org/wikipedia/commons/9/99/Arista-networks-logo.svg. Marque Arista Networks ; le fichier Commons signale les restrictions liées aux marques.
-- Cisco Packet Tracer : icône originale `opt/pt/art/app.png` extraite du paquet Cisco Packet Tracer 8.2.2, distribué sur le miroir https://github.com/andknownmaly/packettracer/releases/download/8.2.2/Packet_Tracer822_amd64_signed.deb ; chemin également décrit par https://raw.githubusercontent.com/andknownmaly/packettracer/refs/heads/main/setup.sh. Le paquet n’a pas été exécuté et n’est pas inclus dans le ZIP ; seule son icône est intégrée. Le logiciel se télécharge officiellement depuis https://www.netacad.com/resources/lab-downloads. Marque et icône Cisco, pas une création de thème d’icônes.
-- n8n, symbole vectoriel rose fourni par la marque : https://n8n.io/brandguidelines/ ; fichier https://guidelines.n8n.design/downloads/logo/symbol/n8n-symbol-accent.svg.
-- SQL et Gantt : pictogrammes neutres locaux (base de données et planning à barres), sans revendication de logo officiel. Méthodes agiles : pictogramme de cycle itératif déjà présent dans le projet.
-- Téléphone et galerie : pictogrammes Lucide (ISC), intégrés localement dans `js/icons.js` ; https://lucide.dev/license.
+Une clé Web3Forms est **déjà présente** dans `contact.web3formsKey` du fichier reçu. Elle est conservée ; contrairement au README précédent, il n’est donc pas exact de dire qu’aucune clé n’a été fournie. Aucune nouvelle clé ni aucun compte n’a été créé. Cette clé est utilisée côté navigateur comme dans le projet initial, et n’est pas un mot de passe de messagerie. Les restrictions de domaine et le destinataire doivent être gérés dans votre compte Web3Forms : `contact.email` ne détermine pas à lui seul la destination de l’envoi via le service.
 
-### Ressources existantes conservées
+Les champs Nom, Email, Sujet et Message sont obligatoires ; la validation, la protection contre les doublons, la limite de temps de 20 secondes, le maintien du message en cas d’erreur et la confirmation uniquement après succès du service sont conservés. Sans clé, le mode de secours ouvre explicitement une messagerie (`mailto:`) sans prétendre avoir envoyé le message.
 
-Les icônes intégrées existantes proviennent notamment de Simple Icons (CC0) et Devicon (MIT), les icônes d’interface de Lucide (ISC), les drapeaux de flag-icons (MIT), et les polices Bricolage Grotesque et Instrument Sans sont sous SIL OFL, selon la provenance documentée dans le projet source.
+**Vérification restant à faire après publication :** envoyer un message réel et vérifier sa réception dans votre boîte. Les tests de livraison ont été simulés localement, sans expédier d’email ni utiliser la clé contre le service réel. L’état de votre compte, la validité de la clé et la réception réelle ne sont donc pas attestés. La copie d’email nécessite un navigateur autorisant l’API presse-papiers, généralement en HTTPS.
 
-Les sources suivantes étaient indiquées dans le README d’origine et sont conservées pour les visuels non remplacés :
+## Préservation et tests
 
+La palette, les polices locales, les animations originales hors ajustements de priorité, les textes non concernés, les effets de survol, les rapports, le CV et les présentations sont préservés. Aucun texte promotionnel, séparateur entre sections ou sous-titre décoratif n’est ajouté. La nouvelle phrase de contact est celle demandée.
+
+Tests Chromium : largeurs **320, 390, 768, 1024 et 1440 px**, en clair et sombre. Vérification des ressources locales, erreurs JavaScript, débordement horizontal, texte avant portrait, langues dans Compétences, logos sans filtre, préférence de réduction des animations, menu mobile, changement de thème, SQL agrandissable et galeries WAN/YaneCode avec clavier et retour du focus. Test supplémentaire des animations actives et de l’ouverture directe de `index.html` sans serveur. Formulaire testé avec réponses locales simulées (validation, objet et adresse de réponse, erreur conservant les champs, succès réinitialisant le formulaire), sans envoi réel.
+
+Comparaison automatique avec le projet reçu : les cinq projets ont gardé toutes leurs données d’origine, sauf l’ajout de la galerie WAN ; les quatre certifications préexistantes sont identiques ; langues, formations et centres d’intérêt inchangés ; puces d’expérience inchangées ; cinq documents PDF/PPTX identiques octet pour octet.
+
+L’historique interne `.git` n’est pas inclus dans le ZIP de livraison : il n’est pas nécessaire au fonctionnement et contient des données de dépôt privées. Tous les fichiers du site et toutes ses ressources sont fournis, y compris les anciens visuels non référencés.
+
+## Provenance des logos et licences
+
+Les marques appartiennent à leurs titulaires ; elles identifient les outils cités sans revendiquer d’affiliation. Une licence d’icônes ne remplace pas les droits des marques. Devicon est sous licence MIT ; texte inclus dans `assets/icons/DEVICON-LICENSE.txt`.
+
+### SVG Devicon couleur intégrés dans cette révision
+
+- `ansible-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/ansible/ansible-original.svg
+- `aws-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original.svg
+- `c-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg
+- `docker-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg
+- `git-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg
+- `githubactions-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg
+- `gnubash-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/bash/bash-original.svg
+- `linux-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg
+- `numpy-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/numpy/numpy-original.svg
+- `opencv-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/opencv/opencv-original.svg
+- `pandas-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/pandas/pandas-original.svg
+- `python-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg
+- `scikitlearn-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/scikitlearn/scikitlearn-original.svg
+- `streamlit-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/streamlit/streamlit-original.svg
+- `tensorflow-color.svg` : https://raw.githubusercontent.com/devicons/devicon/master/icons/tensorflow/tensorflow-original.svg
+
+### Ressources existantes conservées et provenance documentée par le projet reçu
+
+Ces références de provenance étaient fournies dans l’archive initiale ; elles sont conservées à titre d’attribution et ne constituent pas un nouvel audit de tous les sites tiers.
+
+- Java (Devicon, MIT) : https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg
+- Arista : https://commons.wikimedia.org/wiki/File:Arista-networks-logo.svg
+- Cisco Packet Tracer : icône native extraite du paquet 8.2.2 dans la version reçue ; téléchargement officiel du logiciel : https://www.netacad.com/resources/lab-downloads. Le paquet logiciel n’est pas inclus.
+- n8n : https://n8n.io/brandguidelines/ ; https://guidelines.n8n.design/downloads/logo/symbol/n8n-symbol-accent.svg
 - EVE-NG : https://www.eve-ng.net/wp-content/uploads/2019/11/Logo_EVE_Color-e1572621537975.png
 - NetBox : https://github.com/netbox-community/netbox/blob/v4.1.0/netbox/project-static/img/netbox_icon.svg
 - pyATS : https://pubhub.devnetcloud.com/media/pyats-genie/site/images/pyats-logo.png
-- Netmiko : https://ktbyers.github.io/netmiko/images/netmiko_logo_gh.png ; dépôt https://github.com/ktbyers/netmiko
+- Netmiko : https://ktbyers.github.io/netmiko/images/netmiko_logo_gh.png
 - Batfish : https://github.com/batfish/batfish.github.io/blob/master/assets/batfish.svg
 - NAPALM : https://github.com/napalm-automation/napalm/blob/develop/docs/_static/logo.png
-- Chess.com : https://github.com/simple-icons/simple-icons/blob/develop/icons/chessdotcom.svg
+- Simple Icons (CC0), pour les symboles de marque déjà présents : https://simpleicons.org/
+- Interface Lucide (ISC) : https://lucide.dev/license
+- Drapeaux flag-icons (MIT) : https://github.com/lipis/flag-icons
+- Polices Bricolage Grotesque et Instrument Sans : SIL OFL selon la documentation d’origine, intégrées dans le CSS.
 
-Windows Server utilise le logo Windows existant. Active Directory, les télécommunications et la gestion de projet utilisent des pictogrammes descriptifs neutres plutôt que des logos officiels inventés. Les anciens fichiers non référencés sont conservés pour ne pas supprimer inutilement des ressources du projet d’origine.
+SQL est un pictogramme descriptif de base de données, pas un logo officiel de langage ; il en va de même pour Active Directory et les pictogrammes de télécommunications et de gestion de projet. Les fichiers de certificat et de topologie ajoutés sont ceux fournis par le propriétaire du portfolio.
+
+## Informations non vérifiables ici
+
+Aucune information personnelle n’a été inventée. Restent à vérifier en conditions réelles : la réception Web3Forms et l’éventuelle mention Netlify extérieure aux fichiers fournis. La nouvelle capture WAN est utilisée à sa résolution d’origine (1024 × 457) ; aucune version haute définition n’a été fournie ni inventée.

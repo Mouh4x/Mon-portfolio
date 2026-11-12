@@ -13,7 +13,7 @@
 <body>
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#accueil" aria-label="Accueil"><b>Mouhammad</b> <span>Hassani Hamadi</span></a>
+    <a class="brand" href="#accueil" aria-label="Accueil"><b id="brandName"></b></a>
     <nav id="menu" aria-label="Navigation principale">
       <a href="#experience">Expérience</a><a href="#projets">Projets</a><a href="#competences">Compétences</a>
       <a href="#formations">Formations</a><a href="#certifications">Certifications</a><a href="#contact">Contact</a>
@@ -41,7 +41,6 @@
       <div class="blob">
         <img src="assets/img/photo-760.webp" srcset="assets/img/photo-480.webp 480w, assets/img/photo-760.webp 760w" sizes="(max-width: 860px) 70vw, 420px" width="760" height="993" alt="Portrait de Mouhammad Hassani Hamadi" fetchpriority="high">
       </div>
-      <ul class="langs" id="langs" aria-label="Langues"></ul>
     </div>
   </div>
 </section>
@@ -56,6 +55,7 @@
 
 <section class="sec alt" id="competences"><div class="wrap">
   <h2 class="rv">Compétences</h2><div id="skills"></div>
+  <div class="language-block rv" aria-labelledby="languageTitle"><h3 id="languageTitle">Langues</h3><ul class="langs" id="langs" aria-label="Langues"></ul></div>
 </div></section>
 
 <section class="sec" id="formations"><div class="wrap">
@@ -73,7 +73,8 @@
 <section class="sec alt" id="contact"><div class="wrap">
   <h2 class="rv">Contact</h2>
   <div class="contact">
-    <div class="rv">
+    <div class="contact-intro rv">
+      <p class="contact-invitation" id="contactInvitation"></p>
       <address class="contact-details">
         <ul>
           <li><i class="ic" data-ui="mail" aria-hidden="true"></i><a id="mailLink" href="#"></a></li>
@@ -97,7 +98,7 @@
 </div></section>
 </main>
 
-<footer class="foot"><div class="wrap">© <span id="year"></span> Mouhammad Hassani Hamadi</div></footer>
+<footer class="foot"><div class="wrap footer-in"><a class="footer-name" href="#accueil" id="footerName"></a><div class="footer-links" id="footerLinks"></div><small>© <span id="year"></span> <span id="copyrightName"></span></small></div></footer>
 
 <dialog id="lb" class="cert-viewer" aria-labelledby="lbtitle" aria-describedby="lbcaption">
   <div class="lb-toolbar"><h3 id="lbtitle"></h3><button class="icon-btn" id="lbx" type="button" aria-label="Fermer la visionneuse" autofocus><i class="ic" data-ui="x"></i></button></div>
