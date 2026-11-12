@@ -22,8 +22,8 @@ window.PORTFOLIO = {
 
   /* Langues : drapeau = fichier de assets/flags/ */
   langues: [
-    { nom: "Français", niveau: "Langue maternelle", drapeau: "fr" },
     { nom: "Comorien", niveau: "Langue maternelle", drapeau: "km" },
+    { nom: "Français", niveau: "Langue maternelle", drapeau: "fr" },
     { nom: "Anglais",  niveau: "Niveau technique",  drapeau: "gb" },
     { nom: "Arabe",    niveau: "Niveau débutant",   drapeau: "ma" }
   ],
@@ -110,7 +110,7 @@ window.PORTFOLIO = {
         { nom: "Administration Windows Server 2022", logo: "assets/icons/windows.svg", largeCarte: true },
         { nom: "Active Directory", logo: "assets/icons/active-directory.svg", neutre: true } ], notions: [] },
     { categorie: "Développement", outils: [
-        { nom: "Python", logo: "assets/icons/python-color.svg" }, { nom: "C", logo: "assets/icons/c-color.svg" }, { nom: "Java", logo: "assets/icons/java.svg" }, { nom: "Bash", logo: "assets/icons/gnubash-color.svg" },
+        { nom: "Python", logo: "assets/icons/python-color.svg" }, { nom: "Java", logo: "assets/icons/java.svg" }, { nom: "Bash", logo: "assets/icons/gnubash-color.svg" },
         { nom: "SQL", logo: "assets/icons/sql.svg", neutre: true }, { nom: "Streamlit", logo: "assets/icons/streamlit-color.svg" }, { nom: "scikit-learn", logo: "assets/icons/scikitlearn-color.svg" },
         { nom: "pandas", logo: "assets/icons/pandas-color.svg" }, { nom: "NumPy", logo: "assets/icons/numpy-color.svg" }, { nom: "OpenCV", logo: "assets/icons/opencv-color.svg" }, { nom: "TensorFlow", logo: "assets/icons/tensorflow-color.svg" } ], notions: [] },
     { categorie: "Outils d'automatisation", outils: [
