@@ -9,7 +9,6 @@ window.PORTFOLIO = {
     nomFamille: "Hassani Hamadi",
     titre: "Ingénieur Réseaux & Télécommunications", /* utilisé pour le référencement, non affiché */
     lieu: "Casablanca, Maroc",
-    permis: "Permis B",
     /* Introduction animée : la 1re phrase s’écrit lettre par lettre ("debut" + prénom + nom), les suivantes mot par mot. */
     debut: "Je m’appelle",
     phrases: [
