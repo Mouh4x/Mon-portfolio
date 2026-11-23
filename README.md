@@ -16,6 +16,19 @@ Ouvrir **`js/data.js`, ligne 8** :
 
 Modifier uniquement la chaîne entre guillemets. Le rendu est réalisé dans `index.html` par l’élément `#brandName` et initialisé par `js/main.js`. Le nom complet reste dans l’introduction, le pied de page et le libellé accessible du lien d’accueil. Il n’est pas nécessaire de modifier ces fichiers pour changer la marque de navigation.
 
+### Photo de profil, favicon et image de partage
+
+- **Portrait** : `assets/img/portrait-480.webp` et `portrait-760.webp`, recadrés en 4:5 à partir de la photo fournie, sans transparence ni détourage. L’image remplit entièrement le cadre (`object-fit: cover` dans `css/style.css`, règle `.blob img`), il ne reste donc aucune bordure blanche. Pour changer le cadrage, ajuster `object-position` sur cette règle.
+- **Favicon** : `assets/favicon.svg` (icône de profil : tête et épaules, sans photo), avec ses déclinaisons `favicon.ico`, `favicon-32.png`, `favicon-192.png`, `favicon-512.png` et `apple-touch-icon.png` (180×180, fond plein).
+- **Image de partage (Open Graph / Twitter)** : `assets/img/og-image-v3.jpg` (1200×630), référencée dans `index.html`. Le nom change à chaque version pour contourner le cache des réseaux sociaux.
+
+### Compétences : GitHub, GitLab, Jira
+
+- La catégorie « Développement » devient **« Développement et IA »**.
+- **GitHub** et **GitLab** sont dans « Outils d’automatisation », à côté de Git et de GitHub Actions. Logos : `assets/icons/github.svg` et `gitlab-color.svg`.
+- **Jira** est dans « Gestion de projet ». Logo : `assets/icons/jira-color.svg`.
+- GitLab et Jira viennent du paquet Devicon (licence dans `assets/icons/DEVICON-LICENSE.txt`), comme les autres logos couleur.
+
 ## Organisation et contenu unique
 
 - `js/data.js` : unique fichier de données pour l’identité, la marque de navigation, les langues, l’expérience, les projets et leurs galeries, les compétences, les formations, les certifications, les centres d’intérêt, les coordonnées, les liens sociaux et la phrase de contact.

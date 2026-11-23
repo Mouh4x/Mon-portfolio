@@ -108,7 +108,7 @@ window.PORTFOLIO = {
         { nom: "Windows", logo: "assets/icons/windows.svg" },
         { nom: "Administration Windows Server 2022", logo: "assets/icons/windows.svg", largeCarte: true },
         { nom: "Active Directory", logo: "assets/icons/active-directory.svg", neutre: true } ], notions: [] },
-    { categorie: "Développement", outils: [
+    { categorie: "Développement et IA", outils: [
         { nom: "Python", logo: "assets/icons/python-color.svg" }, { nom: "Java", logo: "assets/icons/java.svg" }, { nom: "Bash", logo: "assets/icons/gnubash-color.svg" },
         { nom: "SQL", logo: "assets/icons/sql.svg", neutre: true }, { nom: "Streamlit", logo: "assets/icons/streamlit-color.svg" }, { nom: "scikit-learn", logo: "assets/icons/scikitlearn-color.svg" },
         { nom: "pandas", logo: "assets/icons/pandas-color.svg" }, { nom: "NumPy", logo: "assets/icons/numpy-color.svg" }, { nom: "OpenCV", logo: "assets/icons/opencv-color.svg" }, { nom: "TensorFlow", logo: "assets/icons/tensorflow-color.svg" } ], notions: [] },
@@ -118,10 +118,12 @@ window.PORTFOLIO = {
         { nom: "NetBox", logo: "assets/icons/netbox.svg" }, { nom: "Batfish", logo: "assets/icons/batfish-official.svg" },
         { nom: "pyATS", logo: "assets/icons/pyats.png", large: true }, { nom: "Netmiko", logo: "assets/icons/netmiko.png", large: true },
         { nom: "NAPALM", logo: "assets/icons/napalm-official.png" }, { nom: "Git", logo: "assets/icons/git-color.svg" },
+        { nom: "GitHub", logo: "assets/icons/github.svg" }, { nom: "GitLab", logo: "assets/icons/gitlab-color.svg" },
         { nom: "GitHub Actions", logo: "assets/icons/githubactions-color.svg" }, { nom: "Docker", logo: "assets/icons/docker-color.svg" }, { nom: "AWS (débutant)", logo: "assets/icons/aws-color.svg" } ], notions: [] },
     { categorie: "Gestion de projet", presentation: "cartes", outils: [
         { nom: "Méthodes agiles (Scrum)", logo: "assets/icons/agile.svg", neutre: true },
-        { nom: "Diagramme de Gantt", logo: "assets/icons/gantt.svg", neutre: true } ], notions: [] }
+        { nom: "Diagramme de Gantt", logo: "assets/icons/gantt.svg", neutre: true },
+        { nom: "Jira", logo: "assets/icons/jira-color.svg" } ], notions: [] }
   ],
 
   interets: [
