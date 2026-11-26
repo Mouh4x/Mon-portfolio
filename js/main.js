@@ -24,12 +24,23 @@
     $("#hello").textContent = I.debut; $("#n1").textContent = I.prenom; $("#n2").textContent = I.nomFamille;
     $("#role").textContent = I.phrases[0]; $("#profil").textContent = I.phrases.slice(1).join(" ");
   } else {
-    var t = chars($("#hello"), I.debut, 450, 36);
-    t = chars($("#n1"), I.prenom, t + 70, 36); t = chars($("#n2"), I.nomFamille, t, 36);
-    var t2 = words($("#role"), I.phrases[0], t + 160, 70);
-    $("#portrait").style.setProperty("--portrait-delay", (t2 + 100) + "ms");
-    var t3 = words($("#profil"), I.phrases.slice(1).join(" "), t2 + 80, 45);
-    $("#cta").style.setProperty("--ad", Math.max(t2, t3 - 900) + "ms"); $("#meta").style.setProperty("--ad", Math.max(t2 + 150, t3 - 700) + "ms");
+    var hello = $("#hello"), bonjour = "Bonjour !";
+    chars(hello, bonjour, 450, 75);
+    var reprise = 450 + (bonjour.length - 1) * 75 + 900;
+    setTimeout(function () {
+      hello.classList.add("is-fading");
+      setTimeout(function () {
+        hello.classList.remove("is-fading");
+        var t = chars(hello, I.debut, 0, 36);
+        t = chars($("#n1"), I.prenom, t + 70, 36);
+        t = chars($("#n2"), I.nomFamille, t, 36);
+        var t2 = words($("#role"), I.phrases[0], t + 160, 70);
+        $("#portrait").style.setProperty("--portrait-delay", (t2 + 100) + "ms");
+        var t3 = words($("#profil"), I.phrases.slice(1).join(" "), t2 + 80, 45);
+        $("#cta").style.setProperty("--ad", Math.max(t2, t3 - 900) + "ms");
+        $("#meta").style.setProperty("--ad", Math.max(t2 + 150, t3 - 700) + "ms");
+      }, 320);
+    }, reprise);
   }
   $("#meta").innerHTML = '<li>' + ui("map-pin") + esc(I.lieu) + '</li>';
   $("#langs").innerHTML = D.langues.map(function (l) {

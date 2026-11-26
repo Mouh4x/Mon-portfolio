@@ -209,7 +209,7 @@ dialog img{max-height:88vh;width:auto;max-width:100%;border-radius:12px;backgrou
 
 /* Finitions demandées : contenu d’abord, marques fidèles, contact et pied de page. */
 .hero-txt,.contact-intro,.form{min-width:0}
-.brand{white-space:nowrap}.brand b{letter-spacing:-.035em}
+.brand{white-space:nowrap}.brand b{font-weight:500;letter-spacing:-.02em}
 .language-block{margin-top:48px}.language-block h3{font-size:1.3rem;font-weight:600;margin-bottom:20px}
 .langs li{padding:18px 16px;background:var(--surf);border-radius:14px;box-shadow:inset 0 0 0 1px var(--ln)}
 .langs small{margin-top:5px}
@@ -251,3 +251,9 @@ dialog img{max-height:88vh;width:auto;max-width:100%;border-radius:12px;backgrou
 .linked-interest .ic{color:#81b64c}
 
 .noscript-msg{padding:2rem;text-align:center}
+
+
+
+/* Transition harmonieuse du titre */
+.hello{min-height:1.2em;transition:opacity .32s ease}
+.hello.is-fading{opacity:0}

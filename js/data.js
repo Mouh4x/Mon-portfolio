@@ -12,7 +12,7 @@ window.PORTFOLIO = {
     /* Introduction animée : la 1re phrase s’écrit lettre par lettre ("debut" + prénom + nom), les suivantes mot par mot. */
     debut: "Je m’appelle",
     phrases: [
-      "Diplômé en ingénierie des réseaux et télécommunications en 2026.",
+      "Diplômé cette année en ingénierie des réseaux et télécommunications.",
       "Attiré par les technologies de l’information, je m’intéresse particulièrement aux réseaux, aux systèmes et à leur automatisation. J’aime découvrir de nouvelles technologies, comprendre leur fonctionnement et élargir mes compétences au-delà de mon domaine initial."
     ],
     disponibilite: "Ouvert aux nouvelles opportunités",
