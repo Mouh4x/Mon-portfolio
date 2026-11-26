@@ -44,7 +44,13 @@
 
   /* Projets */
   function imagesProjet(p) { return (p.image ? [{ image: p.image, alt: p.alt }] : []).concat(p.imagesSupplementaires || []); }
-  $("#proj").innerHTML = D.projets.map(function (p, i) {
+  $("#proj").innerHTML = D.projets
+    .map(function (p, i) { return { p: p, i: i }; })
+    .sort(function (a, b) {
+      return Number(!!(b.p.image || b.p.video)) - Number(!!(a.p.image || a.p.video));
+    })
+    .map(function (item) {
+    var p = item.p, i = item.i;
     var images = imagesProjet(p);
     return '<article class="card pj rv' + (p.image || p.video ? " big" : "") + '">' +
       '<div class="pj-b"><div><h3>' + esc(p.titre) + '</h3><small>' + esc([p.type, p.date].filter(Boolean).join(" · ")) + '</small></div><p>' + esc(p.resume) + '</p>' +
