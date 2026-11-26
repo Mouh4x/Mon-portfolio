@@ -1,0 +1,24 @@
+# Système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+
+# Archives et livrables (ne pas versionner les paquets)
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Secrets et configuration locale
+.env
+.env.*
+
+# Outils
+node_modules/
+.netlify/
+*.log

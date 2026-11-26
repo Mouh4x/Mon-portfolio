@@ -94,9 +94,9 @@
       '<div class="cert-images"><button type="button" data-i="' + i + '" aria-haspopup="dialog" aria-controls="lb" aria-label="Agrandir : ' + esc(c.alt || c.titre) + (images.length > 1 ? ' — ' + images.length + ' images disponibles' : '') + '"><img src="' + esc(c.image) + '" alt="' + esc(c.alt || c.titre) + '" loading="lazy">' +
       (images.length > 1 ? '<span class="cert-count" aria-hidden="true">' + ui("images") + '<span>' + images.length + '</span></span>' : '') + '</button></div></article>';
   }).join("");
-  var lb = $("#lb"), lbi = $("#lbi"), certIndex = 0, imageIndex = 0, lbOpener, galleryType = "certification";
-  function showCertImage(n) {
-    var c = galleryType === "projet" ? D.projets[certIndex] : D.certifications[certIndex], images = galleryType === "projet" ? imagesProjet(c) : imagesCert(c);
+  var lb = $("#lb"), lbi = $("#lbi"), galleryIndex = 0, imageIndex = 0, lbOpener, galleryType = "certification"; /* galleryIndex : élément (certification ou projet) ouvert dans la visionneuse */
+  function showGalleryImage(n) {
+    var c = galleryType === "projet" ? D.projets[galleryIndex] : D.certifications[galleryIndex], images = galleryType === "projet" ? imagesProjet(c) : imagesCert(c);
     imageIndex = (n + images.length) % images.length;
     var image = images[imageIndex];
     lbi.src = image.image; lbi.alt = image.alt || c.titre;
@@ -105,17 +105,15 @@
     $("#lbcaption").textContent = lbi.alt;
     $("#lbprev").hidden = $("#lbnext").hidden = images.length < 2;
   }
-  $$(".cert button").forEach(function (b) { b.onclick = function () {
-    galleryType = "certification"; certIndex = Number(b.dataset.i); lbOpener = b; showCertImage(0);
+  function openGallery(type, index, opener) {
+    galleryType = type; galleryIndex = index; lbOpener = opener; showGalleryImage(0);
     lb.showModal(); document.body.classList.add("viewer-open"); $("#lbx").focus();
-  }; });
-  $$("[data-project]").forEach(function (b) { b.onclick = function () {
-    galleryType = "projet"; certIndex = Number(b.dataset.project); lbOpener = b; showCertImage(0);
-    lb.showModal(); document.body.classList.add("viewer-open"); $("#lbx").focus();
-  }; });
+  }
+  $$(".cert button").forEach(function (b) { b.onclick = function () { openGallery("certification", Number(b.dataset.i), b); }; });
+  $$("[data-project]").forEach(function (b) { b.onclick = function () { openGallery("projet", Number(b.dataset.project), b); }; });
   $("#lbx").onclick = function () { lb.close(); };
-  $("#lbprev").onclick = function () { showCertImage(imageIndex - 1); };
-  $("#lbnext").onclick = function () { showCertImage(imageIndex + 1); };
+  $("#lbprev").onclick = function () { showGalleryImage(imageIndex - 1); };
+  $("#lbnext").onclick = function () { showGalleryImage(imageIndex + 1); };
   lb.addEventListener("keydown", function (e) {
     if (e.key === "Tab") {
       var buttons = $$("button", lb).filter(function (b) { return !b.hidden && !b.disabled; });
@@ -124,7 +122,7 @@
       e.preventDefault(); buttons[(current + (e.shiftKey ? -1 : 1) + buttons.length) % buttons.length].focus();
       return;
     }
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); showCertImage(imageIndex + (e.key === "ArrowRight" ? 1 : -1)); }
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); showGalleryImage(imageIndex + (e.key === "ArrowRight" ? 1 : -1)); }
   });
   lb.addEventListener("click", function (e) {
     if (e.target !== lb) return;
@@ -137,7 +135,7 @@
   lbi.addEventListener("touchend", function (e) {
     if (touchX == null || !e.changedTouches.length) return;
     var dx = e.changedTouches[0].clientX - touchX, dy = e.changedTouches[0].clientY - touchY;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) showCertImage(imageIndex + (dx < 0 ? 1 : -1));
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) showGalleryImage(imageIndex + (dx < 0 ? 1 : -1));
     touchX = null;
   }, { passive: true });
 
@@ -156,8 +154,13 @@
   $("#mailLink").textContent = C.email; $("#mailLink").href = "mailto:" + C.email;
   $("#phoneLink").textContent = C.telephone; $("#phoneLink").href = "tel:" + C.telephone.replace(/[^+\d]/g, "");
   $("#postalAddress").textContent = C.adresse;
-  $("#social").innerHTML = C.liens.map(function (l) { return '<li><a href="' + l.url + '" target="_blank" rel="noopener" aria-label="' + l.nom + '" title="' + l.nom + '">' + '<img src="' + esc(l.logo) + '" alt="" width="24" height="24" aria-hidden="true">' + '</a></li>'; }).join("");
-  $("#copy").onclick = function () { var s = $("span", this); navigator.clipboard && navigator.clipboard.writeText(C.email).then(function () { s.textContent = "Adresse copiée"; setTimeout(function () { s.textContent = "Copier l’adresse"; }, 2000); }); };
+  $("#social").innerHTML = C.liens.map(function (l) { return '<li><a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(l.nom) + '" title="' + esc(l.nom) + '">' + '<img src="' + esc(l.logo) + '" alt="" width="24" height="24" aria-hidden="true">' + '</a></li>'; }).join("");
+  $("#copy").onclick = function () {
+    var s = $("span", this), label = "Copier l’adresse";
+    function say(text) { s.textContent = text; setTimeout(function () { s.textContent = label; }, 2200); }
+    if (!navigator.clipboard) return say("Copie indisponible");
+    navigator.clipboard.writeText(C.email).then(function () { say("Adresse copiée"); }, function () { say("Copie impossible"); });
+  };
   var form = $("#form"), st = $("#status");
   var submitButton = $('button[type="submit"]', form), sending = false;
   form.addEventListener("input", function (e) {

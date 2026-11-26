@@ -5,9 +5,9 @@
 window.PORTFOLIO = {
   identite: {
     prenom: "Mouhammad",
-    marque: "</Mouhammad.>", // Texte affiché en haut à gauche de la navigation.
+    marque: "Mouhammad.", // Texte affiché en haut à gauche de la navigation.
     nomFamille: "Hassani Hamadi",
-    titre: "Ingénieur Réseaux & Télécommunications", /* utilisé pour le référencement, non affiché */
+    titre: "Ingénieur Réseaux & Télécommunications", /* non utilisé par le rendu : les métadonnées SEO sont dans index.html */
     lieu: "Casablanca, Maroc",
     /* Introduction animée : la 1re phrase s’écrit lettre par lettre ("debut" + prénom + nom), les suivantes mot par mot. */
     debut: "Je m’appelle",
@@ -52,7 +52,7 @@ window.PORTFOLIO = {
   projets: [
     { titre: "Conception et déploiement d’un WAN d’entreprise multi-sites évolutif", type: "Projet personnel · entreprise fictive", date: "Oct. – Nov. 2025", image: "assets/img/wan.webp", alt: "Topologie réseau Packet Tracer reliant deux sites via un routeur FAI",
       resume: "Interconnecter deux sites distants de façon sécurisée : tunnels VPN site-à-site et accès distant, flux sensibles isolés par VLAN, filtrage par ACL. Architecture hiérarchique (accès, distribution, cœur) conçue pour évoluer, avec routage OSPF, DHCP, NAT et plan d’adressage IPv4, simulée sous Packet Tracer. Extension WiFi et migration IPv6 en préparation.",
-      imagesSupplementaires: [{ image: "assets/img/wan-topologie.png", alt: "Capture complémentaire de la topologie WAN : couches cœur, distribution et accès" }],
+      imagesSupplementaires: [{ image: "assets/img/wan-topologie.webp", alt: "Capture complémentaire de la topologie WAN : couches cœur, distribution et accès" }],
       tags: ["Packet Tracer", "OSPF", "VPN", "VLAN", "ACL", "NAT"], liens: [] },
     { titre: "SecureChat", type: "Projet académique · Messagerie chiffrée pour LAN", date: "Novembre 2025", image: "assets/img/securechat.webp", alt: "Deux fenêtres de l’application SecureChat et le serveur lancé dans un terminal",
       resume: "Protéger les échanges d’une messagerie en réseau local : chaque client reçoit sa propre clé AES-256, transmise sous chiffrement RSA-2048, et chaque message est chiffré en AES-GCM avec un vecteur unique. Application Java/JavaFX en sockets.",
@@ -82,7 +82,7 @@ window.PORTFOLIO = {
     { titre: "Devenez un Expert en Réseaux Informatique", organisme: "Udemy · Karim Addi", date: "20 juillet 2024", validite: "20,5 heures", image: "assets/img/cert-udemy.webp", alt: "Certificat Udemy Devenez un Expert en Réseaux Informatique",
       texte: "Théorie et laboratoires virtuels (Packet Tracer, Wireshark, Cisco IOS) : modèles OSI/TCP-IP, VLAN, IPv4/IPv6 et sous-réseaux, ARP, ICMP, dépannage et sécurité réseau.",
       lien: { texte: "Vérifier le certificat", url: "https://www.udemy.com/certificate/UC-91e4f97e-3bfb-43eb-8579-513a7f0041c4/" } },
-    { titre: "SQL (Basic)", organisme: "HackerRank", date: "18 mars 2024", validite: "", image: "assets/img/cert-sql.png", alt: "Certificat SQL (Basic) de MOUHAMMAD Hassani Hamadi, HackerRank, obtenu le 18 mars 2024",
+    { titre: "SQL (Basic)", organisme: "HackerRank", date: "18 mars 2024", validite: "", image: "assets/img/cert-sql.webp", alt: "Certificat SQL (Basic) de MOUHAMMAD Hassani Hamadi, HackerRank, obtenu le 18 mars 2024",
       titulaire: "MOUHAMMAD Hassani Hamadi", identifiant: "DAE6BE6A8D69", dateISO: "2024-03-18",
       texte: "Certification SQL de niveau Basic portant sur les requêtes simples, les relations et les agrégations.",
       sourceDescription: "https://www.hackerrank.com/certificates/dae6be6a8d69",
