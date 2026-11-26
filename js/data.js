@@ -5,7 +5,7 @@
 window.PORTFOLIO = {
   identite: {
     prenom: "Mouhammad",
-    marque: "Mouhammad.", // Texte affiché en haut à gauche de la navigation.
+    marque: "</Mouhammad.>", // Texte affiché en haut à gauche de la navigation.
     nomFamille: "Hassani Hamadi",
     titre: "Ingénieur Réseaux & Télécommunications", /* utilisé pour le référencement, non affiché */
     lieu: "Casablanca, Maroc",
