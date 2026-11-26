@@ -1,6 +1,6 @@
 # Portfolio — Mouhammad Hassani Hamadi
 
-Portfolio personnel : expérience, projets, compétences, formations et certifications, avec thème clair/sombre, galeries d'images accessibles et formulaire de contact.
+Portfolio personnel d'un ingénieur Réseaux & Télécommunications : expérience, projets, compétences, formations et certifications, avec thème clair/sombre, galeries d'images accessibles et formulaire de contact.
 
 **Démo :** https://mouhammad-portfolio.netlify.app/
 
@@ -18,6 +18,7 @@ Le site est **100 % statique** : HTML, CSS et JavaScript natif, sans framework, 
 - [Personnaliser le portfolio](#personnaliser-le-portfolio)
 - [Formulaire de contact](#formulaire-de-contact)
 - [Déploiement](#déploiement)
+- [Sécurité](#sécurité)
 - [Accessibilité, performance et SEO](#accessibilité-performance-et-seo)
 - [Crédits et licences](#crédits-et-licences)
 
@@ -33,7 +34,7 @@ Le site est **100 % statique** : HTML, CSS et JavaScript natif, sans framework, 
 - **Formulaire de contact** avec validation, anti-spam et repli automatique vers la messagerie.
 - **Responsive** : mise en page adaptée de 320 px à 1440 px, menu burger sur mobile.
 - **Respect de `prefers-reduced-motion`** : toutes les animations sont désactivées si l'utilisateur le demande.
-- **Autonome** : polices, icônes, logos, photos et CV sont embarqués ; aucune requête vers un CDN.
+- **Autonome** : polices, icônes, logos, photos et CV sont hébergés avec le site ; aucune requête vers un CDN.
 
 ## Stack technique
 
@@ -42,30 +43,33 @@ Le site est **100 % statique** : HTML, CSS et JavaScript natif, sans framework, 
 | Structure | HTML5 sémantique |
 | Style | CSS3 : variables CSS, Grid, Flexbox, media queries (aucun préprocesseur) |
 | Logique | JavaScript natif (ES5, sans module ni bundler) |
-| Typographie | Bricolage Grotesque (titres) et Instrument Sans (texte), police WOFF2 intégrée dans le CSS |
+| Typographie | Bricolage Grotesque (titres) et Instrument Sans (texte), fichiers WOFF2 auto-hébergés et préchargés |
 | Icônes | SVG locaux (Devicon, Simple Icons, Lucide, flag-icons) |
 | Images | WebP pour les photos et captures, PNG/SVG pour les logos |
 | API navigateur | `<dialog>`, `IntersectionObserver`, `localStorage`, `fetch`, `matchMedia` |
 | Service externe | [Web3Forms](https://web3forms.com) (envoi du formulaire uniquement) |
-| Hébergement | Netlify (tout hébergeur de fichiers statiques convient) |
+| Hébergement | Netlify (tout hébergeur de fichiers statiques convient), configuration dans `netlify.toml` |
 
 ## Structure du projet
 
 ```
 portfolio/
 ├── index.html          # Structure de la page, métadonnées SEO / Open Graph
+├── netlify.toml        # Configuration d'hébergement : en-têtes de sécurité (CSP) et cache
+├── LICENSE             # Licence MIT (code source uniquement)
+├── .gitignore
 ├── css/
 │   └── style.css       # Styles, thèmes clair/sombre, responsive, animations
 ├── js/
+│   ├── theme.js        # Applique le thème enregistré avant l'affichage (évite le clignotement)
 │   ├── data.js         # ★ Tout le contenu du site (seul fichier à éditer)
 │   ├── main.js         # Rendu des sections, thème, menu, visionneuse, formulaire
-│   └── icons.js        # Icônes d'interface et logos en SVG intégrés
+│   └── icons.js        # Icônes SVG intégrées (interface, centres d'intérêt, réseaux sociaux)
 └── assets/
     ├── img/            # Portrait, captures de projets, certificats, logos d'établissements
     ├── icons/          # Logos des technologies (SVG/PNG) + licence Devicon
     ├── flags/          # Drapeaux des langues (SVG)
-    ├── fonts/          # Fichiers sources des polices (déjà intégrées dans le CSS)
-    ├── ui/             # Icônes d'interface (SVG, copies de référence)
+    ├── fonts/          # Polices WOFF2 (Bricolage Grotesque, Instrument Sans)
     ├── docs/           # CV au format PDF
     └── favicon*, apple-touch-icon.png
 ```
@@ -96,12 +100,12 @@ Le projet repose sur une séparation nette entre **contenu**, **structure** et *
                  icons.js (window.ICONS)
 ```
 
-1. `index.html` charge dans l'ordre `icons.js`, `data.js` puis `main.js`.
+1. `index.html` charge `theme.js` dans le `<head>`, puis `icons.js`, `data.js` et `main.js` en fin de page.
 2. `data.js` expose l'objet global `window.PORTFOLIO` ; `icons.js` expose `window.ICONS`.
 3. `main.js` lit `PORTFOLIO` et injecte le HTML dans les conteneurs de la page (`#exp`, `#proj`, `#skills`, `#tl`, `#certs`, `#likes`…). Les textes sont échappés avant insertion.
 4. Le même script gère les comportements : thème, menu mobile, lien actif selon le défilement, apparitions au scroll, visionneuse d'images et formulaire.
 
-Un script inline dans le `<head>` applique le thème enregistré avant le premier affichage, ce qui évite tout clignotement au chargement.
+Le script `theme.js`, chargé dans le `<head>`, applique le thème enregistré avant le premier affichage, ce qui évite tout clignotement au chargement. Il est volontairement externe : la politique de sécurité du site (voir [Sécurité](#sécurité)) interdit les scripts inline.
 
 ## Personnaliser le portfolio
 
@@ -154,12 +158,12 @@ Options d'affichage d'un outil : `neutre: true` (pictogramme descriptif plutôt 
 - **Portrait** : `assets/img/portrait-480.webp` et `portrait-760.webp` (format 4:5). Le cadrage se règle avec `object-position` sur la règle `.blob img` de `css/style.css`.
 - **CV** : déposer le PDF dans `assets/docs/` et mettre à jour `identite.cv`.
 - **Logos de compétences** : ajouter le fichier dans `assets/icons/` et le référencer dans `competences`.
-- **Icônes d'intérêt** : la valeur `icone` correspond à une clé de `js/icons.js` (`dumbbell`, `book-open`, `graduation-cap`, `clapperboard`, `chessdotcom`…).
+- **Icônes d'intérêt** : la valeur `icone` correspond à une clé de `js/icons.js` (`dumbbell`, `book-open`, `graduation-cap`, `clapperboard`, `chessdotcom`). Pour en ajouter une, insérer son SVG dans ce fichier sous une nouvelle clé.
 
 ### 3. Identité visuelle et référencement
 
 - **Couleurs** : toutes définies en variables CSS au début de `css/style.css` (`:root` pour le thème sombre, `[data-theme=light]` pour le thème clair). Changer `--ac` modifie la couleur d'accent du site.
-- **Polices** : déclarées en `@font-face` dans `css/style.css` (variables `--hd` pour les titres, `--bd` pour le texte).
+- **Polices** : fichiers `.woff2` dans `assets/fonts/`, déclarés en `@font-face` dans `css/style.css` (variables `--hd` pour les titres, `--bd` pour le texte) et préchargés dans le `<head>` de `index.html`. Pour changer de police, remplacer ces fichiers et ces trois endroits.
 - **Métadonnées** : dans le `<head>` de `index.html`, adapter `title`, `description`, `canonical`, les balises `og:*` et `twitter:*` (**URL du site et image de partage incluses**), ainsi que les favicons dans `assets/`.
 - **Image de partage** : `assets/img/og-image-v3.jpg` (1200 × 630). Changer son nom à chaque modification force les réseaux sociaux à rafraîchir leur aperçu.
 
@@ -187,8 +191,18 @@ Une clé Web3Forms est conçue pour être visible côté navigateur ; ce n'est p
 
 Le site se publie sur n'importe quel hébergement statique en HTTPS. Le dossier à publier est celui qui contient `index.html` : `index.html`, `css/`, `js/` et `assets/` doivent se trouver à la racine publiée.
 
-- **Netlify** : glisser-déposer le dossier, ou relier le dépôt Git (aucune commande de build, répertoire de publication = racine du projet).
-- **GitHub Pages / Cloudflare Pages / Vercel** : même principe, sans configuration de build.
+- **Netlify** : glisser-déposer le dossier, ou relier le dépôt Git. Aucune commande de build ; `netlify.toml` fixe la racine du projet comme répertoire de publication et applique les en-têtes de sécurité.
+- **GitHub Pages / Cloudflare Pages / Vercel** : même principe, sans configuration de build. Le fichier `netlify.toml` est alors ignoré : reporter les en-têtes de sécurité dans la configuration de l'hébergeur.
+
+## Sécurité
+
+Les en-têtes HTTP définis dans `netlify.toml` renforcent le site :
+
+- **Content-Security-Policy** : seules les ressources du site lui-même sont chargées (scripts, styles, polices, images), et les requêtes réseau sont limitées à `api.web3forms.com` pour le formulaire. Aucun script inline n'est autorisé.
+- `X-Content-Type-Options`, `X-Frame-Options` et `Referrer-Policy` : protections standard contre le détournement de type de fichier, l'intégration dans un cadre tiers et la fuite d'URL.
+- **Cache** : un an pour les polices, un jour pour les autres ressources de `assets/`.
+
+> **Si vous ajoutez un service externe** (analytique, police ou script tiers, nouvelle API), autorisez-le dans la directive correspondante de la CSP, sinon le navigateur le bloquera.
 
 ## Accessibilité, performance et SEO
 
@@ -199,9 +213,10 @@ Le site se publie sur n'importe quel hébergement statique en HTTPS. Le dossier 
 - Palette définie pour les deux thèmes ; animations désactivées avec `prefers-reduced-motion`.
 
 **Performance**
-- Aucun framework ni bibliothèque : environ 200 Ko de code source au total.
+- Aucun framework ni bibliothèque : environ 75 Ko de code source au total (HTML, CSS et JavaScript).
 - Images WebP, chargement différé (`loading="lazy"`) et `srcset` pour le portrait.
-- Polices intégrées : pas de requête externe bloquante.
+- Polices auto-hébergées, préchargées et affichées avec `font-display: swap` : aucune requête vers un service tiers.
+- CV PDF optimisé (environ 130 Ko au lieu de 1,7 Mo).
 
 **SEO**
 - Balises `title`, `description`, `canonical`, Open Graph et Twitter Card.
@@ -217,7 +232,7 @@ Le site se publie sur n'importe quel hébergement statique en HTTPS. Le dossier 
 - **Polices** : Bricolage Grotesque et Instrument Sans (SIL Open Font License).
 - **Logos de marque** (Cisco, Fortinet, Arista, n8n, NetBox, EVE-NG, pyATS, Netmiko, Batfish, NAPALM…) : propriété de leurs titulaires respectifs, utilisés uniquement pour identifier les outils cités, sans revendiquer d'affiliation.
 
-Le code (HTML, CSS, JavaScript) peut servir de base pour créer votre propre portfolio. Les contenus personnels (textes, photos, certificats, CV) restent la propriété de leur auteur et ne sont pas destinés à être réutilisés.
+Le code source (HTML, CSS, JavaScript) est publié sous [licence MIT](LICENSE) et peut servir de base pour créer votre propre portfolio. Les contenus personnels (textes, photos, certificats, CV, logos d'établissements) ne sont pas couverts par cette licence et ne sont pas destinés à être réutilisés.
 
 ## Auteur
 
