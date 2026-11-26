@@ -48,11 +48,18 @@
     var images = imagesProjet(p);
     return '<article class="card pj rv' + (p.image ? " big" : "") + '">' +
       '<div class="pj-b"><div><h3>' + esc(p.titre) + '</h3><small>' + esc([p.type, p.date].filter(Boolean).join(" · ")) + '</small></div><p>' + esc(p.resume) + '</p>' +
-      (p.liens.length ? '<div class="pj-l">' + p.liens.map(link).join("") + '</div>' : "") + chips(p.tags) + '</div>' +
+      (p.liens.length ? '<div class="pj-l">' + p.liens.map(link).join("") + '</div>' : "") + chips(p.tags) + '</div>' + (p.video ? '<div class="project-video"><button data-video="' + esc(p.video) + '"><img src="https://img.youtube.com/vi/' + p.video + '/hqdefault.jpg" alt="" loading="lazy"><span>▶</span></button></div>' : '') +
       (images.length ? '<figure class="project-gallery"><button type="button" data-project="' + i + '" aria-haspopup="dialog" aria-controls="lb" aria-label="Agrandir les captures : ' + esc(p.titre) + '"><img src="' + esc(images[0].image) + '" alt="' + esc(images[0].alt || p.titre) + '" loading="lazy">' +
       (images.length > 1 ? '<span class="cert-count" aria-hidden="true">' + ui("images") + '<span>' + images.length + '</span></span>' : '') + '</button></figure>' : '') + '</article>';
   }).join("");
 
+  $("#proj").addEventListener("click", function(e) {
+    var b=e.target.closest("[data-video]"); if(!b)return;
+    var f=document.createElement("iframe");
+    f.src="https://www.youtube-nocookie.com/embed/"+b.dataset.video+"?autoplay=1";
+    f.title="Démonstration ReactionOptimizer"; f.allow="autoplay; encrypted-media";
+    f.allowFullscreen=true; b.replaceWith(f);
+  });
   /* Compétences */
   function outil(o) {
     var visuel = '<div class="skill-logo' + (o.neutre ? ' neutral' : ' brand-logo') + (o.large ? ' wide-logo' : '') + '" aria-hidden="true"><img src="' + esc(o.logo) + '" alt="" loading="lazy"></div>';

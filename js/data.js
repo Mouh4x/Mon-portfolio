@@ -5,7 +5,7 @@
 window.PORTFOLIO = {
   identite: {
     prenom: "Mouhammad",
-    marque: "Mouhammad.", // Texte affiché en haut à gauche de la navigation.
+    marque: "<Mouhammad./>", // Texte affiché en haut à gauche de la navigation.
     nomFamille: "Hassani Hamadi",
     titre: "Ingénieur Réseaux & Télécommunications", /* non utilisé par le rendu : les métadonnées SEO sont dans index.html */
     lieu: "Casablanca, Maroc",
@@ -63,7 +63,7 @@ window.PORTFOLIO = {
     { titre: "Extension du réseau LTE sur les espaces blancs TV (TVWS)", type: "PFA · Projet académique", date: "Juil. – Sept. 2025", image: null,
       resume: "Réduire de 3 à 5 points de pourcentage (gain théorique) le taux de blocage d’appels d’un réseau LTE rural, grâce à deux algorithmes d’allocation dynamique des ressources radio entre les deux bandes. Étude de faisabilité d’un déploiement LTE sur le spectre TV inutilisé, pour couvrir les zones rurales à moindre coût.",
       tags: ["LTE", "TVWS", "Allocation de ressources"], liens: [{ texte: "Présentation de soutenance", url: "https://docs.google.com/presentation/d/1EW1m_5LGtaQkPWWdyLrB7GxjUPWVLbcy/edit?usp=drive_link&rtpof=true&sd=true" }] },
-    { titre: "ReactionOptimizer", type: "Application Streamlit", date: "Novembre 2026", image: null,
+    { titre: "ReactionOptimizer", type: "Application Streamlit", date: "Novembre 2026", image: null, video: "rpm2RIFfYZI",
       resume: "Orienter les prochains essais d’une réaction chimique quand les réactifs sont limités : l’application compare 7 modèles prédictifs par validation croisée, propose des conditions optimales sous contraintes et suggère les expériences les plus instructives. Import Excel/CSV, export Excel.",
       tags: ["Python", "Streamlit", "scikit-learn", "pandas"], liens: [{ texte: "Code source", url: "https://github.com/Mouh4x/ReactionOptimizer" }] }
   ],
